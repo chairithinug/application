@@ -1,11 +1,9 @@
 package application;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -15,7 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -28,7 +27,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextFlow;
 
 public class Main extends Application {
 
@@ -92,7 +90,7 @@ public class Main extends Application {
 		buttonInit();
 
 		ButtonBar bottomLeftBox = new ButtonBar();
-		bottomLeftBox.setPrefSize(WINDOW_LEFT, 100);		
+		bottomLeftBox.setPrefSize(WINDOW_LEFT, 100);
 		bottomLeftBox.setButtonMinWidth(BUTTON_WIDTH);
 		bottomLeftBox.getButtons().addAll(addButton, removeButton, clearButton, analyzeButton);
 		ButtonBar.setButtonData(addButton, ButtonData.LEFT);
@@ -139,10 +137,25 @@ public class Main extends Application {
 		HBox bottomRightBox = new HBox();
 		bottomRightBox.setAlignment(Pos.CENTER_RIGHT);
 
-		ScrollBar scrollBar = new ScrollBar();
-		scrollBar.setOrientation(Orientation.VERTICAL);
-		scrollBar.setPrefSize(30, 700);
-		bottomRightBox.getChildren().addAll(scrollBar);
+		VBox scrollableBox = new VBox();
+		scrollableBox.setAlignment(Pos.CENTER_LEFT);
+		scrollableBox.setPrefSize(WINDOW_RIGHT - 25, 800);
+		// Tester
+		for (int i = 0; i < 100; i++) {
+			Button x = new Button("" + i + "\n");
+			x.setAlignment(Pos.CENTER);
+			x.setFont(new Font("Arial", 30));
+			x.setPadding(new Insets(20));
+			x.setPrefSize(WINDOW_RIGHT, 200);
+			scrollableBox.getChildren().add(x);
+		}
+		ScrollPane list = new ScrollPane();
+		list.setContent(scrollableBox);
+		list.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		list.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+
+
+		bottomRightBox.getChildren().addAll(list);
 
 		rightBox.getChildren().addAll(exitButton, buttonRightBox, bottomRightBox);
 
@@ -150,7 +163,7 @@ public class Main extends Application {
 		root.setLeft(leftBox);
 
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setMinHeight(720);
 		primaryStage.setMinWidth(1280);
 		primaryStage.setMaximized(true);
