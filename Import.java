@@ -1,19 +1,14 @@
 package application;
 
-import java.awt.Font;
-import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.text.FontWeight;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.*;
 
 public class Import {
-	void display() {
+	public void display() {
 		Stage popupwindow = new Stage();
 		popupwindow.initModality(Modality.APPLICATION_MODAL); //make sure only be able to work with this current window
 		popupwindow.setTitle("Import");

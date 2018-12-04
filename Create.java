@@ -1,17 +1,5 @@
 package application;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-//import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-package application;
-
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,31 +9,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 //import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
-public class Main extends Application {
-	Stage window;
+public class Create {
 	Button btn1 = new Button();
 	Scene mainmenu;
 	private static Button createButton;
 	private static Button backButton;
-	
-  public static void main(String[] args) {
-    launch(args);
-  }
 
-  @Override
-  public void start(Stage primaryStage) {
+  public void display() {
     Scene scene = new Scene(new Group(), 600, 300);
     
-    window = primaryStage; 
+    Stage window = new Stage();
 	window.setTitle("create a food");
-
+	window.initModality(Modality.APPLICATION_MODAL); //make sure only be able to work with this current window
     TextField notification = new TextField();
     TextField notification2 = new TextField();
     TextField notification3 = new TextField();
@@ -55,7 +36,6 @@ public class Main extends Application {
     TextField notification7 = new TextField();
 
     final ContextMenu contextMenu = new ContextMenu();
-    
 
     notification.setContextMenu(contextMenu);
     GridPane grid = new GridPane();
@@ -103,8 +83,8 @@ public class Main extends Application {
     Group root = (Group) scene.getRoot();
     root.getChildren().add(grid);
     
-    primaryStage.setScene(scene);
-    primaryStage.show();
+    window.setScene(scene);
+    window.show();
     
   }
 }

@@ -1,7 +1,7 @@
 package application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.application.Application;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -11,21 +11,20 @@ import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class Main extends Application {
+public class Analyze{
 	Button btn1 = new Button();
 	Button btn2 = new Button();
-	Stage window;
 	Scene mainmenu;
 	
-	@Override
-	public void start(Stage primaryStage) {
-		window = primaryStage; 
+	public void display() {
+		Stage window = new Stage();
 		window.setTitle("Analyze My Meal");
-	      
+		window.initModality(Modality.APPLICATION_MODAL); //make sure only be able to work with this current window
 			//buttons
 			btn1.setText("Back"); // Set the name for button 1
 			// Action of the button
-			btn1.setOnAction(e -> window.setScene(mainmenu));	
+			//btn1.setOnAction(e -> window.setScene(mainmenu));	
+			btn1.setOnAction(e -> window.close());
 			// Button layout
 			btn1.setPrefSize(80, 40);
 			btn1.setFont(Font.font("arial", 20));
@@ -61,11 +60,5 @@ public class Main extends Application {
 			Scene scene = new Scene(borderPane,550,400);
 			window.setScene(scene);
 			window.show();
-	}
-		
-		
-		
-	public static void main(String[] args) {
-		launch(args);
 	}
 }

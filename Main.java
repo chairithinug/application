@@ -1,23 +1,33 @@
+/**
+ * Filename:   Main.java
+ * Project:    Food Query and Meal Analysis
+ * Version:    1.0
+ * Date:       Nov 29th, 2018
+ * Authors:    Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ * Semester:   Fall 2018
+ * Course:     CS400
+ * Instructor: Deppeler (deppeler@cs.wisc.edu)
+ * Credits:    
+ * Bugs:       
+ *
+ * Due Date:   before 10:00 pm on November 30th
+ */
 package application;
-
-import java.util.Set;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
@@ -35,10 +45,12 @@ import javafx.scene.text.Font;
 
 public class Main extends Application {
 
+	private static Border border = new Border(
+			new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
+
 	static Screen screen = Screen.getPrimary();
 	static Rectangle2D bounds = screen.getVisualBounds();
 
-	// volatile?
 	static final int WINDOW_WIDTH = (int) bounds.getWidth(); // User Screen Width
 	static final int WINDOW_HEIGHT = (int) bounds.getHeight(); // User Screen Height
 	static final int WINDOW_LEFT = (int) (WINDOW_WIDTH / 1.3);
@@ -61,38 +73,29 @@ public class Main extends Application {
 	private static Button createButton;
 	private static Button searchButton;
 	private static Button exitButton;
+
 	private static TextField searchField;
 
-	/*
-	 * private static Button[] buttonList = { addButton, removeButton, clearButton,
-	 * analyzeButton, importButton, filterButton, createButton, searchButton,
-	 * exitButton }; private static String[] buttonNameList = { "Add", "Remove",
-	 * "Clear", "Analyze", "ImportButton", "Filter", "Create", "Search", "Exit" };
-	 */
+	private static Label welcomeText;
+	private static Label mealText;
+	private static Label nameText;
+	private static Label amountText;
 
 	private static Stage primaryStage;
 
 	@Override
 	public void start(Stage primaryStage) {
-		String resolution = WINDOW_WIDTH + " x " + WINDOW_HEIGHT;
-		System.out.println("Screen resolution is: " + resolution);
-		System.out.println("Top: " + WINDOW_TOP + " Left: " + WINDOW_LEFT + " Right: " + (WINDOW_WIDTH - WINDOW_LEFT)
-				+ " Bottom: " + WINDOW_BOTTOM);
+
+		printDimension();
+
 		Main.primaryStage = primaryStage;
 		BorderPane root = new BorderPane();
-		root.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		Label welcomeText = new Label("Welcome to Food Query and Meal Analysis");
-		welcomeText.setFont(new Font("Arial", 48));
-		welcomeText.setPadding(new Insets(20));
-
-		Label mealText = new Label("My Meal");
-		mealText.setFont(new Font("Arial", 40));
-		mealText.setPadding(new Insets(20));
+		labelInit();
 
 		searchField = new TextField("Search Food");
 		searchField.setPrefSize(210, 50);
+		searchField.setFont(new Font("Arial", 20));
 		searchField.setAlignment(Pos.CENTER_LEFT);
 
 		buttonInit();
@@ -106,30 +109,30 @@ public class Main extends Application {
 		ButtonBar.setButtonData(clearButton, ButtonData.LEFT);
 		ButtonBar.setButtonData(analyzeButton, ButtonData.RIGHT);
 		bottomLeftBox.setPadding(new Insets(20));
-		bottomLeftBox.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		bottomLeftBox.setBorder(border);
 
 		HBox topLeftBox = new HBox();
 		topLeftBox.setPrefSize(WINDOW_LEFT, WINDOW_TOP);
 		topLeftBox.setAlignment(Pos.CENTER_LEFT);
 		topLeftBox.getChildren().add(welcomeText);
-		topLeftBox.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		topLeftBox.setBorder(border);
 
 		GridPane mealGrid = new GridPane();
 		mealGrid.setPrefSize(WINDOW_LEFT, WINDOW_HEIGHT - WINDOW_TOP - WINDOW_BOTTOM);
 		mealGrid.setAlignment(Pos.TOP_LEFT);
+		mealGrid.setHgap(20);
 		mealGrid.add(mealText, 0, 0);
-		for (int i = 1; i <= 3; i++) {
-			Label x = new Label("Food #" + i);
-			x.setPadding(new Insets(20));
-			x.setFont(new Font("Arial", 28));
-			mealGrid.add(x, 0, i);
-			
-		}
+		nameText = new Label("Name");
+		nameText.setPadding(new Insets(20));
+		nameText.setFont(new Font("Arial", 20));
+		mealGrid.add(nameText, 0, 1);
+		amountText = new Label("Amount");
+		amountText.setFont(new Font("Arial", 20));
+		mealGrid.add(amountText, 1, 1);
 
-		mealGrid.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		addFoodToMeal(mealGrid, 20);
+
+		mealGrid.setBorder(border);
 
 		ScrollPane mealList = new ScrollPane();
 		mealList.setContent(mealGrid);
@@ -138,13 +141,11 @@ public class Main extends Application {
 
 		VBox leftBox = new VBox();
 		leftBox.getChildren().addAll(topLeftBox, mealList, bottomLeftBox);
-		// leftBox.setMargin(welcomeText, new Insets(20,20,20,20,));
 
 		VBox rightBox = new VBox();
 
 		GridPane buttonRightBox = new GridPane();
-		buttonRightBox.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		buttonRightBox.setBorder(border);
 		buttonRightBox.setPrefSize(WINDOW_RIGHT, 2 * WINDOW_TOP);
 		buttonRightBox.setAlignment(Pos.CENTER);
 		buttonRightBox.setHgap(10);
@@ -177,6 +178,7 @@ public class Main extends Application {
 		root.setLeft(leftBox);
 
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+		// TODO: put all style to CSS
 		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setMinHeight(720);
 		primaryStage.setMinWidth(1280);
@@ -186,9 +188,9 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle(Title);
 		primaryStage.show();
-
 	}
 
+	// This is a dummy function that displays
 	private static void addFoodList(VBox vbox) {
 		for (int i = 1; i <= 100; i++) {
 			Button x = new Button("Food #" + i);
@@ -199,17 +201,43 @@ public class Main extends Application {
 			vbox.getChildren().add(x);
 		}
 	}
+	
+	// This is a dummy function that displays
+	public static void addFoodToMeal(GridPane meal, int num) {
+		for (int i = 0; i < num; i++) {
+			Label x = new Label("Food #" + (i + 1));
+			x.setPadding(new Insets(20));
+			x.setFont(new Font("Arial", 28));
+			meal.add(x, 0, i + 2);
 
+			TextField a = new TextField("1");
+			a.setPrefSize(2 * BUTTON_WIDTH, BUTTON_HEIGHT);
+			a.setFont(new Font("Arial", 16));
+			a.setAlignment(Pos.CENTER);
+
+			meal.add(a, 1, i + 2, 5, 1);
+
+			Button p = new Button("+");
+			p.setFont(new Font("Arial", 20));
+			Button m = new Button("-");
+			m.setFont(new Font("Arial", 20));
+
+			meal.add(p, 6, i + 2);
+			meal.add(m, 7, i + 2);
+		}
+	}
+
+	// This is a dummy function that displays
+	private static void printDimension() {
+		String resolution = WINDOW_WIDTH + " x " + WINDOW_HEIGHT;
+		System.out.println("Screen resolution is: " + resolution);
+		System.out.println("Top: " + WINDOW_TOP + " Left: " + WINDOW_LEFT + " Right: " + (WINDOW_WIDTH - WINDOW_LEFT)
+				+ " Bottom: " + WINDOW_BOTTOM);
+	}
+
+	// This is a dummy function that displays
 	private static void buttonInit() {
-
-		/*
-		 * for(int i = 0; i < buttonList.length; i++) { //buttonList[i] = new
-		 * Button(buttonNameList[i]); buttonList[i].setPrefSize(100, 50);
-		 * buttonList[i].setAlignment(Pos.CENTER); }
-		 */
-
 		addButton = new Button("Add");
-		// addButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		addButton.setFont(new Font("Arial", 20));
 		addButton.setAlignment(Pos.CENTER);
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -220,7 +248,6 @@ public class Main extends Application {
 		});
 
 		removeButton = new Button("Remove");
-		// removeButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		removeButton.setFont(new Font("Arial", 20));
 		removeButton.setAlignment(Pos.CENTER);
 		removeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -231,7 +258,6 @@ public class Main extends Application {
 		});
 
 		clearButton = new Button("Clear");
-		// clearButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		clearButton.setFont(new Font("Arial", 20));
 		clearButton.setAlignment(Pos.CENTER);
 		clearButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -242,13 +268,14 @@ public class Main extends Application {
 		});
 
 		analyzeButton = new Button("Analyze");
-		// analyzeButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 		analyzeButton.setFont(new Font("Arial", 20));
 		analyzeButton.setAlignment(Pos.CENTER);
 		analyzeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("You pressed Analyze!");
+				Analyze analyzePopup = new Analyze();
+				analyzePopup.display();
 			}
 		});
 
@@ -260,6 +287,8 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("You pressed Import!");
+				Import importPopup = new Import();
+				importPopup.display();
 			}
 		});
 
@@ -271,6 +300,8 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("You pressed Filter!");
+				Filter filterPopup = new Filter();
+				filterPopup.display();
 			}
 		});
 
@@ -282,6 +313,8 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("You pressed Create!");
+				Create createPopup = new Create();
+				createPopup.display();
 			}
 		});
 
@@ -303,7 +336,6 @@ public class Main extends Application {
 		});
 
 		exitButton = new Button("Exit!");
-		// exitButton.setFont();
 		exitButton.setPrefSize(WINDOW_RIGHT, WINDOW_TOP);
 		exitButton.setFont(new Font("Arial", 36));
 		exitButton.setAlignment(Pos.CENTER);
@@ -313,6 +345,16 @@ public class Main extends Application {
 				primaryStage.close();
 			}
 		});
+	}
+
+	private static void labelInit() {
+		welcomeText = new Label("Welcome to Food Query and Meal Analysis");
+		welcomeText.setFont(new Font("Arial", 48));
+		welcomeText.setPadding(new Insets(20));
+
+		mealText = new Label("My Meal");
+		mealText.setFont(new Font("Arial", 40));
+		mealText.setPadding(new Insets(20));
 	}
 
 	public static void main(String[] args) {

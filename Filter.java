@@ -1,12 +1,10 @@
 package application;
 
-import java.awt.Font;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.FontWeight;
 import javafx.stage.*;
 
 public class Filter {
