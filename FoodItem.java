@@ -26,36 +26,37 @@ public class FoodItem {
     public FoodItem(String id, String name) {
     	this.name = name;
     	this.id = id;
-        Scanner scnr = new Scanner ("foodItems.csv");
-        String info = null;
-        Scanner sc = new Scanner(info);
-        while (scnr.hasNextLine()) {
-        	info = scnr.nextLine();
-        	if (sc.hasNext()) {
-        		if (sc.next() == id && sc.hasNext()) { // not sure if has has
-        			if (sc.next() == name) {
-        				break;
-        			}
-        		}
-        	}
-        }
-        while (sc.hasNext()) {
-        	String n_type = null;
-        	Double data = 0.0;
-        	if (sc.hasNext()) {
-        		n_type = sc.next();
-        	}
-        	else break;
-        	if (sc.hasNextDouble()) {
-        		data = sc.nextDouble();
-        	}
-        	else break;
-        	if (n_type != null) {
-        		nutrients.put(n_type, data);
-        	}
+        nutrients=new HashMap<String,Double>();
+       // Scanner scnr = new Scanner ("foodItems.csv");
+//         String info = null;
+//         Scanner sc = new Scanner(info);
+//         while (scnr.hasNextLine()) {
+//         	info = scnr.nextLine();
+//         	if (sc.hasNext()) {
+//         		if (sc.next() == id && sc.hasNext()) { // not sure if has has
+//         			if (sc.next() == name) {
+//         				break;
+//         			}
+//         		}
+//         	}
+//         }
+//         while (sc.hasNext()) {
+//         	String n_type = null;
+//         	Double data = 0.0;
+//         	if (sc.hasNext()) {
+//         		n_type = sc.next();
+//         	}
+//         	else break;
+//         	if (sc.hasNextDouble()) {
+//         		data = sc.nextDouble();
+//         	}
+//         	else break;
+//         	if (n_type != null) {
+//         		nutrients.put(n_type, data);
+//         	}
         	
-        }
-        scnr.close();
+//         }
+//         scnr.close();
     }
     
     /**
@@ -64,11 +65,11 @@ public class FoodItem {
      * @return name of the food item
      */
     public String getName() {
-    	if (name == null) {
-    		System.out.println("No information under this name yet");
-    		return null;
-    	}
-        return name;
+//     	if (name == null) {
+//     		System.out.println("No information under this name yet");
+//     		return null;
+//     	}
+        return this.name;
     }
 
     /**
@@ -77,11 +78,11 @@ public class FoodItem {
      * @return id of the food item
      */
     public String getID() {
-    	if (id == null) {
-    		System.out.println("No such ID found");
-    		return null;
-    	}
-        return id;
+//     	if (id == null) {
+//     		System.out.println("No such ID found");
+//     		return null;
+//     	}
+        return this.id;
     }
     
     /**
@@ -90,7 +91,7 @@ public class FoodItem {
      * @return nutrients of the food item
      */
     public HashMap<String, Double> getNutrients() {
-        return nutrients;
+        return this.nutrients;
     }
 
     /**
@@ -98,13 +99,13 @@ public class FoodItem {
      * If nutrient already exists, updates its value.
      */
     public void addNutrient(String name, double value) {
-        if (name != null) {
+        if (name != null) {//Check for valid data elsewhere??
         	nutrients.put(name, value); // this already contain the update
         	// not so sure about if correctly insert
         }
-        else {
-        	System.out.println("given invalid name information.");
-        }
+//         else {
+//         	System.out.println("given invalid name information.");
+//         }
     }
 
     /**
@@ -112,13 +113,19 @@ public class FoodItem {
      * If not present, then returns 0.
      */
     public double getNutrientValue(String name) {
-        if (nutrients.containsKey(name)) {
-        	return nutrients.get(name);
-        }
-        else {
-        	System.out.println("no such nutrient.");
-        }
-        return -1;
-    }
+//         if (nutrients.containsKey(name)) {
+            if(nutrients.get(name)!=null){
+                return nutrients.get(name);
+            }else{
+              return 0;
+            }
+
+        	
+//         }
+//         else {
+//         	System.out.println("no such nutrient.");
+//         }
+//         return -1;
+//     }
     
 }
