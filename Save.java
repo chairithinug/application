@@ -7,12 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
-public class Import {
+public class Save {
 
 	public void display(FoodData list) {
 		Stage popupwindow = new Stage();
 		popupwindow.initModality(Modality.APPLICATION_MODAL); // make sure only be able to work with this current window
-		popupwindow.setTitle("Import");
+		popupwindow.setTitle("Save");
 		popupwindow.setWidth(400);
 		popupwindow.setHeight(200);
 
@@ -23,16 +23,16 @@ public class Import {
 		Label filepath = new Label("File Path:");
 		filepath.setStyle("-fx-font-size: 14px;");
 
-		TextField t1field = new TextField("src/application/foodItems.csv");
+		TextField t1field = new TextField("FoodOut.csv");
 		t1field.setPrefWidth(350);
 
 		Label msg = new Label();
 
 		Button back = new Button("Back");
 		back.setOnAction(e -> popupwindow.close());
-		Button impbutton = new Button("Import");
+		Button impbutton = new Button("Save");
 		impbutton.setOnAction(e -> {
-			list.loadFoodItems(t1field.getText());
+			list.saveFoodItems(t1field.getText());
 			if (list.getStatusError()) {
 				msg.setText("Invalid Path!");
 				list.setStatusError(false);

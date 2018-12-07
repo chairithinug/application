@@ -23,13 +23,13 @@ public class FoodData implements FoodDataADT<FoodItem> {
 
 	// Map of nutrients and their corresponding indices
 	private HashMap<String, BPTree<Double, FoodItem>> indices;
-	
+
 	private boolean flagError = false;
-	
+
 	public boolean getStatusError() {
 		return flagError;
 	}
-	
+
 	public void setStatusError(boolean t) {
 		flagError = t;
 	}
@@ -86,7 +86,7 @@ public class FoodData implements FoodDataADT<FoodItem> {
 			matches.forEach(list -> matches.get(0).retainAll(list));
 			return matches.get(0);
 		} else {
-			return new ArrayList<FoodItem>();
+			return null;
 		}
 	}
 

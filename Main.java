@@ -15,6 +15,7 @@
  */
 package application;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,8 +35,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -49,16 +49,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Main extends Application {
-	private static FoodData list = new FoodData();
-	private static List<FoodItem> filteredList = list.getAllFoodItems();
-
-	private static Meal meal = new Meal();
 
 	private static ObservableList<FoodItem> foodObservableList = FXCollections.observableArrayList();
 	private static ListView<FoodItem> foodListView = new ListView<FoodItem>(foodObservableList);
+	private static FoodData loadedList = new FoodData(); // Original list of all food
+	private static List<FoodItem> filteredList = loadedList.getAllFoodItems();
 
 	private static ObservableList<FoodItem> mealObservableList = FXCollections.observableArrayList();
 	private static ListView<FoodItem> mealListView = new ListView<FoodItem>(mealObservableList);
+	private static Meal meal = new Meal();
 
 	private static Border border = new Border(
 			new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
@@ -68,7 +67,7 @@ public class Main extends Application {
 
 	static final int WINDOW_WIDTH = (int) bounds.getWidth(); // User Screen Width
 	static final int WINDOW_HEIGHT = (int) bounds.getHeight(); // User Screen Height
-	static final int WINDOW_LEFT = (int) (WINDOW_WIDTH / 1.3);
+	static final int WINDOW_LEFT = (int) (WINDOW_WIDTH / 1.5);
 	static final int WINDOW_RIGHT = WINDOW_WIDTH - WINDOW_LEFT;
 	static final int WINDOW_TOP = (int) (WINDOW_HEIGHT / 10);
 	static final int WINDOW_BOTTOM = (int) (WINDOW_HEIGHT / 10);
@@ -86,6 +85,7 @@ public class Main extends Application {
 	private static Button importButton;
 	private static Button filterButton;
 	private static Button createButton;
+	private static Button saveButton;
 	private static Button exitButton;
 
 	private static Label welcomeText;
@@ -110,7 +110,7 @@ public class Main extends Application {
 		ButtonBar.setButtonData(removeButton, ButtonData.LEFT);
 		ButtonBar.setButtonData(clearButton, ButtonData.LEFT);
 		ButtonBar.setButtonData(analyzeButton, ButtonData.RIGHT);
-		bottomLeftBox.setPadding(new Insets(20));
+		bottomLeftBox.setPadding(new Insets(25));
 		bottomLeftBox.setBorder(border);
 
 		HBox topLeftBox = new HBox();
@@ -135,6 +135,8 @@ public class Main extends Application {
 		mealGrid.setBorder(border);
 
 		mealListView.setPrefSize(WINDOW_LEFT, WINDOW_HEIGHT - WINDOW_TOP - WINDOW_BOTTOM);
+		mealListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		foodListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 		VBox leftBox = new VBox();
 		leftBox.getChildren().addAll(topLeftBox, mealListView, bottomLeftBox);
@@ -150,6 +152,7 @@ public class Main extends Application {
 		buttonRightBox.add(importButton, 0, 0);
 		buttonRightBox.add(filterButton, 1, 0);
 		buttonRightBox.add(createButton, 2, 0);
+		buttonRightBox.add(saveButton, 3, 0);
 
 		foodListView.setPrefSize(WINDOW_RIGHT, WINDOW_HEIGHT - 2 * WINDOW_TOP);
 
@@ -160,7 +163,7 @@ public class Main extends Application {
 
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 		// TODO: put all style to CSS
-		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setMinHeight(720);
 		primaryStage.setMinWidth(1280);
 		primaryStage.setMaximized(true);
@@ -172,10 +175,9 @@ public class Main extends Application {
 	}
 
 	// This is a dummy function that displays
-	private static void addFoodList(List<FoodItem> list) {
+	private static void updateFoodListView(List<FoodItem> list) {
 		foodObservableList.removeAll(foodObservableList);
 		Iterator<FoodItem> listIterator = list.iterator();
-		int i = 0;
 		while (listIterator.hasNext()) {
 			foodObservableList.add(listIterator.next());
 		}
@@ -184,30 +186,52 @@ public class Main extends Application {
 	// This is a dummy function that displays
 	private static void buttonInit() {
 		addButton = new Button("Add");
-//		addButton.setFont(new Font("Arial", 20));
-//		addButton.setAlignment(Pos.CENTER);
+		addButton.setFont(new Font("Arial", 20));
+		addButton.setAlignment(Pos.CENTER);
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (foodListView.getSelectionModel().getSelectedItem() != null) {
-					mealObservableList.add(foodListView.getSelectionModel().getSelectedItem());
-					meal.addToMeal(foodListView.getSelectionModel().getSelectedItem());
+				ObservableList<FoodItem> selected = foodListView.getSelectionModel().getSelectedItems();
+				if (selected != null) {
+					for (FoodItem s : selected) {
+						mealObservableList.add(s);
+						meal.addToMeal(s);
+					}
 				}
+				mealObservableList.sort(new Comparator<FoodItem>() {
+					@Override
+					public int compare(FoodItem f1, FoodItem f2) {
+						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
+					}
+				});
 			}
 		});
 
 		removeButton = new Button("Remove");
+		removeButton.setFont(new Font("Arial", 20));
+		removeButton.setAlignment(Pos.CENTER);
 		removeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (mealListView.getSelectionModel().getSelectedItem() != null) {
-					mealObservableList.remove(mealListView.getSelectionModel().getSelectedItem());
-					meal.removeFromMeal(mealListView.getSelectionModel().getSelectedItem());
+				ObservableList<FoodItem> selected = mealListView.getSelectionModel().getSelectedItems();
+				if (selected != null) {
+					for (FoodItem s : selected) {
+						mealObservableList.remove(s);
+						meal.removeFromMeal(s);
+					}
 				}
+				mealObservableList.sort(new Comparator<FoodItem>() {
+					@Override
+					public int compare(FoodItem f1, FoodItem f2) {
+						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
+					}
+				});
 			}
 		});
 
 		clearButton = new Button("Clear");
+		clearButton.setFont(new Font("Arial", 20));
+		clearButton.setAlignment(Pos.CENTER);
 		clearButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -217,6 +241,8 @@ public class Main extends Application {
 		});
 
 		analyzeButton = new Button("Analyze");
+		analyzeButton.setFont(new Font("Arial", 20));
+		analyzeButton.setAlignment(Pos.CENTER);
 		analyzeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -227,35 +253,66 @@ public class Main extends Application {
 
 		importButton = new Button("Import");
 		importButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		importButton.setFont(new Font("Arial", 20));
+		importButton.setAlignment(Pos.CENTER);
 		importButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				Import importPopup = new Import();
-				importPopup.display(list);
-
-				addFoodList(list.getAllFoodItems());
+				importPopup.display(loadedList);
+				loadedList.getAllFoodItems().sort(new Comparator<FoodItem>() {
+					@Override
+					public int compare(FoodItem f1, FoodItem f2) {
+						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
+					}
+				});
+				updateFoodListView(loadedList.getAllFoodItems());
 			}
 		});
 
 		filterButton = new Button("Filter");
 		filterButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		filterButton.setFont(new Font("Arial", 20));
+		filterButton.setAlignment(Pos.CENTER);
 		filterButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				// FIX
 				Filter filterPopup = new Filter();
-				filterPopup.display(list, filteredList);
-				addFoodList(list.getAllFoodItems());
+				filteredList.clear();
+				filterPopup.display(loadedList, filteredList);
+				updateFoodListView(filteredList);
 			}
 		});
 
 		createButton = new Button("Create");
 		createButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		createButton.setFont(new Font("Arial", 20));
+		createButton.setAlignment(Pos.CENTER);
 		createButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				Create createPopup = new Create();
-				createPopup.display(list);
-				addFoodList(list.getAllFoodItems());
+				createPopup.display(loadedList);
+				loadedList.getAllFoodItems().sort(new Comparator<FoodItem>() {
+					@Override
+					public int compare(FoodItem f1, FoodItem f2) {
+						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
+					}
+				});
+				updateFoodListView(loadedList.getAllFoodItems());
+			}
+		});
+
+		saveButton = new Button("Save");
+		saveButton.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+		saveButton.setFont(new Font("Arial", 20));
+		saveButton.setAlignment(Pos.CENTER);
+		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Save savePopup = new Save();
+				savePopup.display(loadedList);
 			}
 		});
 

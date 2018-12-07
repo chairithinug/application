@@ -83,14 +83,16 @@ public class Meal {
 		double protein = 0;
 
 		Iterator<FoodItem> mealIterator = mealList.iterator();
-		while (mealIterator.hasNext()) {
+		Iterator<Integer> amountIterator = amount.iterator();
+		while (mealIterator.hasNext() && amountIterator.hasNext()) {
 			FoodItem curFood = mealIterator.next();
+			Integer amountFood = amountIterator.next();
 			// sum up nutrients
-			calories += curFood.getNutrientValue("calories");
-			fat += curFood.getNutrientValue("fat");
-			carbohydrate += curFood.getNutrientValue("carbohydrate");
-			fiber += curFood.getNutrientValue("fiber");
-			protein += curFood.getNutrientValue("protein");
+			calories += (curFood.getNutrientValue("calories") * amountFood);
+			fat += (curFood.getNutrientValue("fat") * amountFood);
+			carbohydrate += (curFood.getNutrientValue("carbohydrate") * amountFood);
+			fiber += (curFood.getNutrientValue("fiber") * amountFood);
+			protein += (curFood.getNutrientValue("protein") * amountFood);
 		}
 		// generate a list of report
 		ArrayList<Double> totalData = new ArrayList<Double>();
@@ -109,17 +111,24 @@ public class Meal {
 	 */
 	public void removeFromMeal(FoodItem food) {
 		Iterator<FoodItem> mealIterator = mealList.iterator();
+		if (food == null) {
+			return;
+		}
 		while (mealIterator.hasNext()) {
 			FoodItem curFood = mealIterator.next();
 			if (curFood.getID().equals(food.getID())) {
 				int index = mealList.indexOf(curFood);
-				// if this is the last food count
-				if (amount.get(index) <= 1) {
-					mealList.remove(index);
-					amount.remove(index);
-				} else { // decrement the food count
-					Integer numberOfFood = amount.get(index);
-					amount.set(index, --numberOfFood);
+				if (amount != null && mealList != null) { // if this is the last food of on meal
+					// if this is the last food count
+					if (amount.get(index) == 1) {
+						mealList.remove(index);
+						amount.remove(index);
+					} else { // decrement the food count
+						Integer numberOfFood = amount.get(index);
+						amount.set(index, --numberOfFood);
+					}
+				} else {
+					clearMeal();
 				}
 				return;
 			}
