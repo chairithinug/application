@@ -99,10 +99,10 @@ public class FoodItem {
      * If nutrient already exists, updates its value.
      */
     public void addNutrient(String name, double value) {
-        if (name != null) {//Check for valid data elsewhere??
+       // if (name != null) {//Check for valid data elsewhere??
         	nutrients.put(name, value); // this already contain the update
         	// not so sure about if correctly insert
-        }
+      //  }
 //         else {
 //         	System.out.println("given invalid name information.");
 //         }
