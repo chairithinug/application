@@ -21,7 +21,7 @@ public class Create {
 	private static Button createButton;
 	private static Button backButton;
 
-  public void display() {
+  public void display(FoodData list) {
     Scene scene = new Scene(new Group(), 600, 300);
     
     Stage window = new Stage();
@@ -55,7 +55,7 @@ public class Create {
     grid.add(new Label("Fat: "), 0, 3);
     grid.add(notification4, 1, 3);
     
-    grid.add(new Label("Carbanhydrate: "), 0, 4);
+    grid.add(new Label("Carbohydrate: "), 0, 4);
     grid.add(notification5, 1, 4);
     
     grid.add(new Label("Fiber: "), 0, 5);
@@ -66,13 +66,30 @@ public class Create {
     
   //buttons layout for exit and create 
     backButton = new Button("Back");
+	backButton.setOnAction(e -> window.close());
     createButton = new Button("Create");
 	//createButton.setPrefSize(10, 10);
 	//createButton.setAlignment(Pos.CENTER);
 	createButton.setOnAction(new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent event) {
-			System.out.println("You pressed Create!");
+			if (!(notification.getText() == null && notification2.getText() == null && notification3.getText() == null && notification4.getText() == null && notification5.getText() == null &&notification6.getText() == null && notification7.getText() == null) ){
+				try {
+					FoodItem newFood = new FoodItem(notification.getText(),notification2.getText());
+					newFood.addNutrient("calories", Double.parseDouble(notification3.getText()));
+					newFood.addNutrient("fat", Double.parseDouble(notification4.getText()));
+					newFood.addNutrient("carbohydrate", Double.parseDouble(notification5.getText()));
+					newFood.addNutrient("fiber", Double.parseDouble(notification6.getText()));
+					newFood.addNutrient("protein", Double.parseDouble(notification7.getText()));
+					list.addFoodItem(newFood);
+					window.close();
+				}
+				catch(Exception e) {
+					
+				}
+			} else {
+				
+			}
 		}
 		
 	});

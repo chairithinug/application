@@ -23,6 +23,16 @@ public class FoodData implements FoodDataADT<FoodItem> {
 
 	// Map of nutrients and their corresponding indices
 	private HashMap<String, BPTree<Double, FoodItem>> indices;
+	
+	private boolean flagError = false;
+	
+	public boolean getStatusError() {
+		return flagError;
+	}
+	
+	public void setStatusError(boolean t) {
+		flagError = t;
+	}
 
 	/**
 	 * Public constructor
@@ -56,6 +66,7 @@ public class FoodData implements FoodDataADT<FoodItem> {
 				}
 			});
 		} catch (IOException e) {
+			flagError = true;
 			e.printStackTrace();
 		}
 	}

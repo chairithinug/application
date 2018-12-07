@@ -132,8 +132,8 @@ public class Meal {
 	 * Reset the whole meal
 	 */
 	public void clearMeal() {
-		mealList = null;
-		amount = null;
+		mealList.clear();
+		amount.clear();
 	}
 
 }

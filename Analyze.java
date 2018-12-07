@@ -16,7 +16,7 @@ public class Analyze{
 	Button btn2 = new Button();
 	Scene mainmenu;
 	
-	public void display() {
+	public void display(Meal meal) {
 		Stage window = new Stage();
 		window.setTitle("Analyze My Meal");
 		window.initModality(Modality.APPLICATION_MODAL); //make sure only be able to work with this current window
@@ -32,11 +32,11 @@ public class Analyze{
 			//left menu
 			VBox leftmenu = new VBox(30);
 			
-			Label label1 = new Label("Total Calories: 400");
-			Label label2 = new Label("Total Fat: 15g");
-			Label label3 = new Label("Total Carbohydrate: 50g");
-			Label label4 = new Label("Total Fiber: 2g");
-			Label label5 = new Label("Total Protein: 8g");
+			Label label1 = new Label("Total Calories: " + meal.analyzeMeal().get(0));
+			Label label2 = new Label("Total Fat: " + meal.analyzeMeal().get(1) + " g");
+			Label label3 = new Label("Total Carbohydrate: " + meal.analyzeMeal().get(2) + " g");
+			Label label4 = new Label("Total Fiber: " + meal.analyzeMeal().get(3) + " g");
+			Label label5 = new Label("Total Protein: " + meal.analyzeMeal().get(4) + " g");
 			
 			label1.setFont(Font.font("arial", 20));
 			label2.setFont(Font.font("arial", 20));

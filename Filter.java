@@ -1,5 +1,8 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
@@ -11,7 +14,7 @@ public class Filter {
 	private String twelvePxFont = "-fx-font-size: 12px;";// helps promote consistency
 	private String t = "to";// helps promote consistency
 
-	void display() {
+	void display(FoodData list, List<FoodItem> returnList) {
 		Stage popupwindow = new Stage();
 		popupwindow.initModality(Modality.APPLICATION_MODAL);// make sure only be able to work with this current window
 		popupwindow.setTitle("Filter");
@@ -26,12 +29,94 @@ public class Filter {
 		CheckBox cb2 = new CheckBox("By Nutrient");
 		cb2.setStyle("-fx-font-weight: bold;" + "-fx-font-size: 18px;");
 
+		TextField t2field = new TextField();// text fields for the range of nutrients
+		TextField t3field = new TextField();// can't have duplicate children in a HBox
+		TextField t4field = new TextField();// separate HBoxes can't share children with other HBoxes
+		TextField t5field = new TextField();
+		TextField t6field = new TextField();
+		TextField t7field = new TextField();
+		TextField t8field = new TextField();
+		TextField t9field = new TextField();
+		TextField t10field = new TextField();
+		TextField t11field = new TextField();
+
 		TextField t1field = new TextField();// Text Field for the Name filter
 		t1field.setPrefWidth(150);
 		Button back = new Button("Back");
 		back.setOnAction(e -> popupwindow.close());
 		Button clr = new Button("Clear");
+		clr.setOnAction(e -> {
+			cb1.setSelected(false);
+			cb2.setSelected(false);
+			t1field.setText("");
+			t2field.setText("");
+			t3field.setText("");
+			t4field.setText("");
+			t5field.setText("");
+			t6field.setText("");
+			t7field.setText("");
+			t8field.setText("");
+			t9field.setText("");
+			t10field.setText("");
+			t11field.setText("");
+		});
 		Button apply = new Button("Apply");
+		apply.setOnAction(e -> {
+			List<FoodItem> filtered1 = null;
+			List<FoodItem> filtered2 = null;
+			if (cb1.isSelected()) {
+				if (t1field.getText() != null) {
+					filtered1 = list.filterByName(t1field.getText());
+				}
+			}
+			if (cb2.isSelected()) {
+				try {
+					// FIX TO USE ==
+					List<String> rule = new ArrayList<String>();
+					if (t2field.getText() != null) {
+						rule.add("calories >= " + t2field.getText());
+					}
+					if (t3field.getText() != null) {
+						rule.add("calories <= " + t3field.getText());
+					}
+					if (t4field.getText() != null) {
+						rule.add("fat >= " + t4field.getText());
+					}
+					if (t5field.getText() != null) {
+						rule.add("fat <= " + t5field.getText());
+					}
+					if (t6field.getText() != null) {
+						rule.add("carbohydrate >= " + t6field.getText());
+					}
+					if (t7field.getText() != null) {
+						rule.add("carbohydrate <= " + t7field.getText());
+					}
+					if (t8field.getText() != null) {
+						rule.add("fiber >= " + t8field.getText());
+					}
+					if (t9field.getText() != null) {
+						rule.add("fiber <= " + t9field.getText());
+					}
+					if (t10field.getText() != null) {
+						rule.add("protein >= " + t10field.getText());
+					}
+					if (t11field.getText() != null) {
+						rule.add("protein <= " + t11field.getText());
+					}
+					filtered2 = list.filterByNutrients(rule);
+				} catch (Exception f) {
+
+				}
+			}
+			if (cb1.isSelected() && cb2.isSelected()) {
+				filtered1.retainAll(filtered2);
+				returnList.addAll(filtered1);
+			} else if (cb1.isSelected()) {
+				returnList.addAll(filtered1);
+			} else if (cb2.isSelected()) {
+				returnList.addAll(filtered2);
+			}
+		});
 
 		Label to1 = new Label(t);
 		to1.setStyle(twelvePxFont);
@@ -54,17 +139,6 @@ public class Filter {
 		fiber.setStyle(twelvePxFont);
 		Label protein = new Label("Protein from");
 		protein.setStyle(twelvePxFont);
-
-		TextField t2field = new TextField();// text fields for the range of nutrients
-		TextField t3field = new TextField();// can't have duplicate children in a HBox
-		TextField t4field = new TextField();// separate HBoxes can't share children with other HBoxes
-		TextField t5field = new TextField();
-		TextField t6field = new TextField();
-		TextField t7field = new TextField();
-		TextField t8field = new TextField();
-		TextField t9field = new TextField();
-		TextField t10field = new TextField();
-		TextField t11field = new TextField();
 
 		VBox vb1 = new VBox();
 		VBox vb2 = new VBox();
