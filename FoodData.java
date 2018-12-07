@@ -121,7 +121,7 @@ public class FoodData implements FoodDataADT<FoodItem> {
 			foodItemList.sort(new Comparator<FoodItem>() {
 				@Override
 				public int compare(FoodItem f1, FoodItem f2) {
-					return f1.getName().compareTo(f2.getName());
+					return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
 				}
 			});
 			Files.write(new File(filename).toPath(), this.foodItemList.stream().map(item -> {
