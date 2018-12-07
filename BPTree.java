@@ -748,33 +748,33 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// create empty BPTree with branching factor of 3
-		BPTree<Double, Double> bpTree = new BPTree<>(3);
+// 	public static void main(String[] args) {
+// 		// create empty BPTree with branching factor of 3
+// 		BPTree<Double, Double> bpTree = new BPTree<>(3);
 
-		// create a pseudo random number generator
-		Random rnd1 = new Random();
+// 		// create a pseudo random number generator
+// 		Random rnd1 = new Random();
 
-		// some value to add to the BPTree
-		Double[] dd = { 0.0d, 0.5d, 0.2d, 0.8d };
+// 		// some value to add to the BPTree
+// 		Double[] dd = { 0.0d, 0.5d, 0.2d, 0.8d };
 
-		// build an ArrayList of those value and add to BPTree also
-		// allows for comparing the contents of the ArrayList
-		// against the contents and functionality of the BPTree
-		// does not ensure BPTree is implemented correctly
-		// just that it functions as a data structure with
-		// insert, rangeSearch, and toString() working.
-		List<Double> list = new ArrayList<>();
-		 for (int i = 0; i < 400; i++) {
-		 Double j = dd[rnd1.nextInt(4)];
-		System.out.println("THIS NEEDS TO BE DELTED: inserting:"+j);
-		 list.add(j);
-		 bpTree.insert(j, j);
-		 System.out.println("\n\nTree structure:\n" + bpTree.toString());
-		 }
+// 		// build an ArrayList of those value and add to BPTree also
+// 		// allows for comparing the contents of the ArrayList
+// 		// against the contents and functionality of the BPTree
+// 		// does not ensure BPTree is implemented correctly
+// 		// just that it functions as a data structure with
+// 		// insert, rangeSearch, and toString() working.
+// 		List<Double> list = new ArrayList<>();
+// 		 for (int i = 0; i < 400; i++) {
+// 		 Double j = dd[rnd1.nextInt(4)];
+// 		System.out.println("THIS NEEDS TO BE DELTED: inserting:"+j);
+// 		 list.add(j);
+// 		 bpTree.insert(j, j);
+// 		 System.out.println("\n\nTree structure:\n" + bpTree.toString());
+// 		 }
 
-		 List<Double> filteredValues = bpTree.rangeSearch(0.2d, ">="); 
-		 System.out.println("Filtered values: " + filteredValues.toString());
-	}
+// 		 List<Double> filteredValues = bpTree.rangeSearch(0.2d, ">="); 
+// 		 System.out.println("Filtered values: " + filteredValues.toString());
+// 	}
 
 } // End of class BPTree
