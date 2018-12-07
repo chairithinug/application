@@ -10,7 +10,7 @@ public class TestingMeal {
 
 		FoodData list = new FoodData();
 		list.loadFoodItems("src/application/foodItems.csv");
-		list.saveFoodItems("QQFORLIFE.txt");
+		//list.saveFoodItems("QQFORLIFE.txt");
 		
 //		list.loadFoodItems("src/application/foodItems.csv");
 //		int i = 0;
@@ -57,23 +57,24 @@ public class TestingMeal {
 //				System.out.println(foodIterator2.next().getName());
 //			}
 //		}
-		
-//		List<String> rule = new ArrayList<String>();
-//		rule.add("carbohydrate == 0");
+		System.out.println(list.filterByName("Rana_RavioliChickenRosemary").get(0).getNutrientValue("carbohydrate"));
+		List<String> rule = new ArrayList<String>();
+		rule.add("carbohydrate >= 30");
+//		rule.add("carbohydrate <= 0");
 //		rule.add("protein == 0");
 //		rule.add("fat == 0");
 //		rule.add("calories == 0");
 //		rule.add("fiber == 0");
-//		
-//		List<FoodItem> b2 = list.filterByNutrients(rule);
-//		if (b2 == null) {
-//			System.out.println("NULL");
-//		} else {
-//			Iterator<FoodItem> foodIterator3 = b2.iterator();
-//			while (foodIterator3.hasNext()) {
-//				System.out.println(foodIterator3.next().getName());
-//			}
-//		}
+		
+		List<FoodItem> b2 = list.filterByNutrients(rule);
+		if (b2 == null) {
+			System.out.println("NULL");
+		} else {
+			Iterator<FoodItem> foodIterator3 = b2.iterator();
+			while (foodIterator3.hasNext()) {
+				System.out.println(foodIterator3.next().getName());
+			}
+		}
 
 //		Meal dinner = new Meal();
 

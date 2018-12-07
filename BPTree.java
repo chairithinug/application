@@ -613,6 +613,7 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 					while (keyIndex < curr.keys.size()) {
 						if (curr.keys.get(keyIndex).compareTo(key) >= 0) {
 							valsInRange.add(curr.values.get(keyIndex));
+							System.out.println("Keys to right:"+curr.keys.get(keyIndex));
 						}
 
 						keyIndex++;
@@ -633,6 +634,7 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 							&& tempNode.keys.get(tempIndex).compareTo(storedNode.keys.get(storedIndex)) == 0) {
 
 						valsInRange.add(0, tempNode.values.get(tempIndex));
+						System.out.println("Keys to left:"+tempNode.keys.get(keyIndex));
 						tempIndex--;
 					}
 					if (tempNode.previous == null) {

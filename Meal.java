@@ -134,7 +134,7 @@ public class Meal {
 			}
 		}
 		// error there is no food to be removed
-		System.out.println("No Food! Can't delete!");
+//		System.out.println("No Food! Can't delete!");
 	}
 
 	/**

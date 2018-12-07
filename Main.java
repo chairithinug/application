@@ -277,7 +277,6 @@ public class Main extends Application {
 		filterButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// FIX
 				Filter filterPopup = new Filter();
 				filteredList.clear();
 				filterPopup.display(loadedList, filteredList);
