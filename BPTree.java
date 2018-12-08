@@ -1,3 +1,4 @@
+
 /**
  * Filename:   BPTree.java
  * Project:    Team Project
@@ -13,7 +14,7 @@
  * 
  * Bugs:       TODO: add any known bugs, or unsolved problems here
  */
-package application;
+//package application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -411,10 +412,10 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 			curr = (BPTree<K, V>.InternalNode) root;// allows access to children
 			boolean foundLeaf = false;
 			while (!foundLeaf) {
-
 				if (key.compareTo(curr.keys.get(keyIndex)) >= 0) {
 					if (curr.keys.size() > 1 && keyIndex < curr.keys.size() - 1
-							&& key.compareTo(curr.keys.get(keyIndex)) > 0) {
+							&& key.compareTo(curr.keys.get(keyIndex)) > 0
+							&& key.compareTo(curr.keys.get(keyIndex + 1)) >= 0) {
 						keyIndex++;
 						continue;
 					} else {
@@ -581,7 +582,6 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 		 * @see BPTree.Node#rangeSearch(Comparable, String)
 		 */
 		List<V> rangeSearch(K key, String comparator) {
-
 			List<V> valsInRange = new ArrayList<V>();
 			int keyIndex = 0;
 			boolean keyExist = false;
@@ -602,7 +602,6 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 			int storedIndex = keyIndex;// to restart from beginning when changing traversal direction
 			LeafNode storedNode = this;// to restart from beginning when changing traversal direction
 			LeafNode curr = this;// to traverse in one direction
-
 			int tempIndex = storedIndex;// to traverse in the other direction
 			LeafNode tempNode = storedNode;// to traverse in the other direction
 			List<V> listForOneDirection = new ArrayList<V>();
@@ -613,7 +612,6 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 					while (keyIndex < curr.keys.size()) {
 						if (curr.keys.get(keyIndex).compareTo(key) >= 0) {
 							valsInRange.add(curr.values.get(keyIndex));
-							System.out.println("Keys to right:"+curr.keys.get(keyIndex));
 						}
 
 						keyIndex++;
@@ -634,7 +632,6 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 							&& tempNode.keys.get(tempIndex).compareTo(storedNode.keys.get(storedIndex)) == 0) {
 
 						valsInRange.add(0, tempNode.values.get(tempIndex));
-						System.out.println("Keys to left:"+tempNode.keys.get(keyIndex));
 						tempIndex--;
 					}
 					if (tempNode.previous == null) {
