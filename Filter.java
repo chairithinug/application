@@ -72,44 +72,54 @@ public class Filter {
 					filtered1 = list.filterByName(t1field.getText());
 				}
 			}
+			boolean isError = false;
 			if (cb2.isSelected()) {
 				try {
 					List<String> rule = new ArrayList<String>();
-					if (t2field.getText() != null) {
-						rule.add("calories <= " + t2field.getText());
+					if (!t2field.getText().trim().isEmpty()) {
+						rule.add("calories >= " + Double.parseDouble(t2field.getText()));
+						System.out.println(Double.parseDouble(t2field.getText()));
 					}
-					if (t7field.getText() != null) {
-						rule.add("calories >= " + t7field.getText());
+					if (!t7field.getText().trim().isEmpty()) {
+						rule.add("calories <= " + Double.parseDouble(t7field.getText()));
+						System.out.println(Double.parseDouble(t7field.getText()));
 					}
-					if (t3field.getText() != null) {
-						rule.add("fat <= " + t3field.getText());
+					if (!t3field.getText().trim().isEmpty()) {
+						rule.add("fat >= " + Double.parseDouble(t3field.getText()));
+						System.out.println(Double.parseDouble(t3field.getText()));
 					}
-					if (t8field.getText() != null) {
-						rule.add("fat >= " + t8field.getText());
+					if (!t8field.getText().trim().isEmpty()) {
+						rule.add("fat <= " + Double.parseDouble(t8field.getText()));
+						System.out.println(Double.parseDouble(t8field.getText()));
 					}
-					if (t4field.getText() != null) {
-						rule.add("carbohydrate <= " + t4field.getText());
+					if (!t4field.getText().trim().isEmpty()) {
+						rule.add("carbohydrate >= " + Double.parseDouble(t4field.getText()));
+						System.out.println(Double.parseDouble(t4field.getText()));
 					}
-					if (t9field.getText() != null) {
-						rule.add("carbohydrate >= " + t9field.getText());
+					if (!t9field.getText().trim().isEmpty()) {
+						rule.add("carbohydrate <= " + Double.parseDouble(t9field.getText()));
+						System.out.println(Double.parseDouble(t9field.getText()));
 					}
-					if (t5field.getText() != null) {
-						rule.add("fiber <= " + t5field.getText());
+					if (!t5field.getText().trim().isEmpty()) {
+						rule.add("fiber >= " + Double.parseDouble(t5field.getText()));
+						System.out.println(Double.parseDouble(t5field.getText()));
 					}
-					if (t10field.getText() != null) {
-						rule.add("fiber >= " + t10field.getText());
+					if (!t10field.getText().trim().isEmpty()) {
+						rule.add("fiber <= " + Double.parseDouble(t10field.getText()));
+						System.out.println(Double.parseDouble(t10field.getText()));
 					}
-					if (t6field.getText() != null) {
-						rule.add("protein <= " + t6field.getText());
+					if (!t6field.getText().trim().isEmpty()) {
+						rule.add("protein >= " + Double.parseDouble(t6field.getText()));
+						System.out.println(Double.parseDouble(t6field.getText()));
 					}
-					if (t11field.getText() != null) {
-						rule.add("protein >= " + t11field.getText());
+					if (!t11field.getText().trim().isEmpty()) {
+						rule.add("protein <= " + Double.parseDouble(t11field.getText()));
+						System.out.println(Double.parseDouble(t11field.getText()));
 					}
-					if (checkValidField()) {
-						filtered2 = list.filterByNutrients(rule);
-					}
+					filtered2 = list.filterByNutrients(rule);
+					System.out.println(filtered2 == null);
 				} catch (Exception f) {
-
+					isError = true;
 				}
 			}
 			if (returnList != null && list != null) {
@@ -125,8 +135,7 @@ public class Filter {
 					returnList.addAll(list.getAllFoodItems());
 				}
 			}
-			if (checkValidField() || cb1.isSelected()) {
-
+			if (!isError) {
 				popupwindow.close();
 			}
 		});
@@ -235,20 +244,5 @@ public class Filter {
 		t9field.clear();
 		t10field.clear();
 		t11field.clear();
-	}
-
-	private boolean checkValidField() {
-		try {
-			if (Double.parseDouble(t3field.getText()) >= 0 && Double.parseDouble(t4field.getText()) >= 0
-					&& Double.parseDouble(t5field.getText()) >= 0 && Double.parseDouble(t6field.getText()) >= 0
-					&& Double.parseDouble(t7field.getText()) >= 0 && Double.parseDouble(t8field.getText()) >= 0
-					&& Double.parseDouble(t9field.getText()) >= 0 && Double.parseDouble(t10field.getText()) >= 0
-					&& Double.parseDouble(t11field.getText()) >= 0) {
-				return true;
-			}
-		} catch (Exception e) {
-			return false;
-		}
-		return false;
 	}
 }

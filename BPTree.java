@@ -14,7 +14,7 @@
  * 
  * Bugs:       TODO: add any known bugs, or unsolved problems here
  */
-//package application;
+package application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,11 +33,9 @@ import java.util.Random;
  * 
  * @author sapan (sapan@cs.wisc.edu)
  *
- * @param <K>
- *            key - expect a string that is the type of id for each item
- * @param <V>
- *            value - expect a user-defined type that stores all data for a food
- *            item
+ * @param <K> key - expect a string that is the type of id for each item
+ * @param <V> value - expect a user-defined type that stores all data for a food
+ *        item
  */
 public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 
@@ -222,8 +220,7 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 		/**
 		 * helps find left key in the leftmost internal node's leaf in the sub tree
 		 * 
-		 * @param n
-		 *            node for traversal
+		 * @param n node for traversal
 		 * @return left most key in leaf
 		 */
 		K getFirstLeafKeyHelper(Node n) {
@@ -296,12 +293,9 @@ public class BPTree<K extends Comparable<K>, V> implements BPTreeADT<K, V> {
 		/**
 		 * inserts a key value pair in correct location
 		 * 
-		 * @param key
-		 *            used to traverse through tree
-		 * @param value
-		 *            used with range search
-		 * @param curr
-		 *            current node
+		 * @param key   used to traverse through tree
+		 * @param value used with range search
+		 * @param curr  current node
 		 * @return a child in the correct traversal direction
 		 */
 		InternalNode insertHelper(K key, V value, Node curr) {

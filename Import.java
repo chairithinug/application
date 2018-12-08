@@ -32,7 +32,7 @@ public class Import {
 		back.setOnAction(e -> popupwindow.close());
 		Button impbutton = new Button("Import");
 		impbutton.setOnAction(e -> {
-			list.loadFoodItems(t1field.getText());
+			list.loadFoodItems(t1field.getText().trim());
 			if (list.getStatusError()) {
 				msg.setText("Invalid Path!");
 				list.setStatusError(false);
