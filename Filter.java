@@ -79,42 +79,62 @@ public class Filter {
 					if (!t2field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t2field.getText()) >= 0)
 							rule.add("calories >= " + Double.parseDouble(t2field.getText()));
+						else
+							isError = true;
 					}
 					if (!t7field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t7field.getText()) >= 0)
 							rule.add("calories <= " + Double.parseDouble(t7field.getText()));
+						else
+							isError = true;
 					}
 					if (!t3field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t3field.getText()) >= 0)
 							rule.add("fat >= " + Double.parseDouble(t3field.getText()));
+						else
+							isError = true;
 					}
 					if (!t8field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t8field.getText()) >= 0)
 							rule.add("fat <= " + Double.parseDouble(t8field.getText()));
+						else
+							isError = true;
 					}
 					if (!t4field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t4field.getText()) >= 0)
 							rule.add("carbohydrate >= " + Double.parseDouble(t4field.getText()));
+						else
+							isError = true;
 					}
 					if (!t9field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t9field.getText()) >= 0)
 							rule.add("carbohydrate <= " + Double.parseDouble(t9field.getText()));
+						else
+							isError = true;
 					}
 					if (!t5field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t5field.getText()) >= 0)
 							rule.add("fiber >= " + Double.parseDouble(t5field.getText()));
+						else
+							isError = true;
 					}
 					if (!t10field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t10field.getText()) >= 0)
 							rule.add("fiber <= " + Double.parseDouble(t10field.getText()));
+						else
+							isError = true;
 					}
 					if (!t6field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t6field.getText()) >= 0)
 							rule.add("protein >= " + Double.parseDouble(t6field.getText()));
+						else
+							isError = true;
 					}
 					if (!t11field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t11field.getText()) >= 0)
 							rule.add("protein <= " + Double.parseDouble(t11field.getText()));
+						else
+							isError = true;
 					}
 					filtered2 = list.filterByNutrients(rule);
 					System.out.println(filtered2 == null);
