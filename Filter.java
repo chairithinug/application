@@ -77,44 +77,44 @@ public class Filter {
 				try {
 					List<String> rule = new ArrayList<String>();
 					if (!t2field.getText().trim().isEmpty()) {
-						rule.add("calories >= " + Double.parseDouble(t2field.getText()));
-						System.out.println(Double.parseDouble(t2field.getText()));
+						if (Double.parseDouble(t2field.getText()) >= 0)
+							rule.add("calories >= " + Double.parseDouble(t2field.getText()));
 					}
 					if (!t7field.getText().trim().isEmpty()) {
-						rule.add("calories <= " + Double.parseDouble(t7field.getText()));
-						System.out.println(Double.parseDouble(t7field.getText()));
+						if (Double.parseDouble(t7field.getText()) >= 0)
+							rule.add("calories <= " + Double.parseDouble(t7field.getText()));
 					}
 					if (!t3field.getText().trim().isEmpty()) {
-						rule.add("fat >= " + Double.parseDouble(t3field.getText()));
-						System.out.println(Double.parseDouble(t3field.getText()));
+						if (Double.parseDouble(t3field.getText()) >= 0)
+							rule.add("fat >= " + Double.parseDouble(t3field.getText()));
 					}
 					if (!t8field.getText().trim().isEmpty()) {
-						rule.add("fat <= " + Double.parseDouble(t8field.getText()));
-						System.out.println(Double.parseDouble(t8field.getText()));
+						if (Double.parseDouble(t8field.getText()) >= 0)
+							rule.add("fat <= " + Double.parseDouble(t8field.getText()));
 					}
 					if (!t4field.getText().trim().isEmpty()) {
-						rule.add("carbohydrate >= " + Double.parseDouble(t4field.getText()));
-						System.out.println(Double.parseDouble(t4field.getText()));
+						if (Double.parseDouble(t4field.getText()) >= 0)
+							rule.add("carbohydrate >= " + Double.parseDouble(t4field.getText()));
 					}
 					if (!t9field.getText().trim().isEmpty()) {
-						rule.add("carbohydrate <= " + Double.parseDouble(t9field.getText()));
-						System.out.println(Double.parseDouble(t9field.getText()));
+						if (Double.parseDouble(t9field.getText()) >= 0)
+							rule.add("carbohydrate <= " + Double.parseDouble(t9field.getText()));
 					}
 					if (!t5field.getText().trim().isEmpty()) {
-						rule.add("fiber >= " + Double.parseDouble(t5field.getText()));
-						System.out.println(Double.parseDouble(t5field.getText()));
+						if (Double.parseDouble(t5field.getText()) >= 0)
+							rule.add("fiber >= " + Double.parseDouble(t5field.getText()));
 					}
 					if (!t10field.getText().trim().isEmpty()) {
-						rule.add("fiber <= " + Double.parseDouble(t10field.getText()));
-						System.out.println(Double.parseDouble(t10field.getText()));
+						if (Double.parseDouble(t10field.getText()) >= 0)
+							rule.add("fiber <= " + Double.parseDouble(t10field.getText()));
 					}
 					if (!t6field.getText().trim().isEmpty()) {
-						rule.add("protein >= " + Double.parseDouble(t6field.getText()));
-						System.out.println(Double.parseDouble(t6field.getText()));
+						if (Double.parseDouble(t6field.getText()) >= 0)
+							rule.add("protein >= " + Double.parseDouble(t6field.getText()));
 					}
 					if (!t11field.getText().trim().isEmpty()) {
-						rule.add("protein <= " + Double.parseDouble(t11field.getText()));
-						System.out.println(Double.parseDouble(t11field.getText()));
+						if (Double.parseDouble(t11field.getText()) >= 0)
+							rule.add("protein <= " + Double.parseDouble(t11field.getText()));
 					}
 					filtered2 = list.filterByNutrients(rule);
 					System.out.println(filtered2 == null);
