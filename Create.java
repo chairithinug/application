@@ -15,17 +15,23 @@ import javafx.stage.Modality;
 //import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+* This class add new food to existiing food list 
+**/
 public class Create {
 	Button btn1 = new Button();
 	Scene mainmenu;
 	private static Button createButton;
 	private static Button backButton;
-
+	
+	/**
+	* This method set the display of the new food 
+	**/
 	public void display(FoodData list) {
 		Scene scene = new Scene(new Group());
 
 		Stage window = new Stage();
-		window.setTitle("Create");
+		window.setTitle("Create"); // set title of the window 
 		window.initModality(Modality.APPLICATION_MODAL); // make sure only be able to work with this current window
 		TextField notification = new TextField("53E4F123GG");
 		TextField notification2 = new TextField("QQ_PeanutButterChicken");
@@ -36,7 +42,7 @@ public class Create {
 		TextField notification7 = new TextField("15");
 
 		final ContextMenu contextMenu = new ContextMenu();
-
+		// display layout
 		notification.setContextMenu(contextMenu);
 		GridPane grid = new GridPane();
 		grid.setVgap(4);
