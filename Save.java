@@ -7,30 +7,38 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
+/**
+* This class decribes the save function
+**/
 public class Save {
-
+	
+	/**
+	* This method set the display the save window
+	*
+	* @param the lists of food data
+	**/
 	public void display(FoodData list) {
 		Stage popupwindow = new Stage();
 		popupwindow.initModality(Modality.APPLICATION_MODAL); // make sure only be able to work with this current window
-		popupwindow.setTitle("Save");
+		popupwindow.setTitle("Save"); // title of the window
 		popupwindow.setWidth(400);
-		popupwindow.setHeight(200);
+		popupwindow.setHeight(200); // size of the window 
 
-		BorderPane bp = new BorderPane();
+		BorderPane bp = new BorderPane(); // create a new borderpane
 		Insets insets = new Insets(10, 10, 10, 10);
 		bp.setPadding(insets);
 
-		Label filepath = new Label("File Path:");
-		filepath.setStyle("-fx-font-size: 14px;");
+		Label filepath = new Label("File Path:"); // create filepath label
+		filepath.setStyle("-fx-font-size: 14px;"); // set label display
 
 		TextField t1field = new TextField("FoodOut.csv");
 		t1field.setPrefWidth(350);
 
-		Label msg = new Label();
+		Label msg = new Label(); // create msg label
 
-		Button back = new Button("Back");
-		back.setOnAction(e -> popupwindow.close());
-		Button impbutton = new Button("Save");
+		Button back = new Button("Back"); // create a back button
+		back.setOnAction(e -> popupwindow.close()); // set the action of the back button
+		Button impbutton = new Button("Save"); // create a impbutton button
 		impbutton.setOnAction(e -> {
 			list.saveFoodItems(t1field.getText());
 			if (list.getStatusError()) {
@@ -39,18 +47,18 @@ public class Save {
 			} else {
 				popupwindow.close();
 			}
-		});
+		}); // set the action of impbutton button
 
-		HBox hbox = new HBox();
-		hbox.setSpacing(10);
-		hbox.getChildren().addAll(back, impbutton);
-		hbox.setAlignment(Pos.BOTTOM_RIGHT);
+		HBox hbox = new HBox(); // create a new hbox
+		hbox.setSpacing(10); // set spacing
+		hbox.getChildren().addAll(back, impbutton); // add buttons to display
+		hbox.setAlignment(Pos.BOTTOM_RIGHT); // set the postion of the hbox
 
-		VBox vbox = new VBox();
-		vbox.getChildren().addAll(filepath, t1field, msg);
+		VBox vbox = new VBox(); // create a new vbox
+		vbox.getChildren().addAll(filepath, t1field, msg); // add filepath, t1field and msg to display
 
 		bp.setLeft(vbox);
-		bp.setBottom(hbox);
+		bp.setBottom(hbox); // set position
 
 		Scene scene1 = new Scene(bp, 500, 300);
 		popupwindow.setScene(scene1);
