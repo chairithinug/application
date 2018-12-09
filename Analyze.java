@@ -12,11 +12,16 @@ import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/**
+* Set analyze GUI layout
+**/
 public class Analyze {
-	Button btn1 = new Button();
-	Button btn2 = new Button();
+	Button btn1 = new Button(); // create a new button
 	Scene mainmenu;
-
+	
+	/**
+	* Descibes the window display
+	**/
 	public void display(Meal meal) {
 		Stage window = new Stage();
 		window.setTitle("Analyze My Meal");
@@ -30,15 +35,15 @@ public class Analyze {
 		btn1.setPrefSize(80, 40);
 		btn1.setFont(Font.font("arial", 20));
 
-		// left menu
+		// set left menu
 		VBox leftmenu = new VBox(30);
-
+		//create new buttons
 		Label label1 = new Label("Total Calories: " + meal.analyzeMeal().get(0));
 		Label label2 = new Label("Total Fat: " + meal.analyzeMeal().get(1) + " g");
 		Label label3 = new Label("Total Carbohydrate: " + meal.analyzeMeal().get(2) + " g");
 		Label label4 = new Label("Total Fiber: " + meal.analyzeMeal().get(3) + " g");
 		Label label5 = new Label("Total Protein: " + meal.analyzeMeal().get(4) + " g");
-
+		// set button layout
 		label1.setFont(Font.font("arial", 20));
 		label2.setFont(Font.font("arial", 20));
 		label3.setFont(Font.font("arial", 20));
@@ -49,12 +54,12 @@ public class Analyze {
 		// bottom menu
 		HBox bottommenu = new HBox();
 		bottommenu.getChildren().add(btn1);
-		bottommenu.setAlignment(Pos.BOTTOM_CENTER);
-		bottommenu.setPadding(new Insets(10, 10, 50, 10)); // set position for bottom pane
+		bottommenu.setAlignment(Pos.BOTTOM_CENTER); // set position
+		bottommenu.setPadding(new Insets(10, 10, 50, 10)); 
 
-		// add to border pane
+		// add to border pane and set layout
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPadding(new Insets(50, 10, 10, 10));
+		borderPane.setPadding(new Insets(50, 10, 10, 10)); 
 		borderPane.setLeft(leftmenu);
 		borderPane.setBottom(bottommenu);
 
