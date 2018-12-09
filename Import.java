@@ -33,7 +33,7 @@ public class Import {
 		TextField t1field = new TextField("src/application/foodItems.csv");
 		t1field.setPrefWidth(350); 
 
-		Label msg = new Label();
+		Label msg = new Label(); // create msg label
 
 		Button back = new Button("Back"); // create a back button
 		back.setOnAction(e -> popupwindow.close()); // set the action of the back button
