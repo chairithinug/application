@@ -8,7 +8,7 @@ import javafx.scene.layout.*;
 import javafx.geometry.*;
 
 /**
-* This class decribes the import function
+* This class describes the import function
 **/
 public class Import {
 	/**

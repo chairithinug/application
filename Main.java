@@ -53,7 +53,7 @@ public class Main extends Application {
 	private static ObservableList<FoodItem> foodObservableList = FXCollections.observableArrayList();
 	private static ListView<FoodItem> foodListView = new ListView<FoodItem>(foodObservableList);
 	private static FoodData loadedList = new FoodData(); // Original list of all food
-	private static List<FoodItem> filteredList = loadedList.getAllFoodItems();
+	private static List<FoodItem> filteredList;
 
 	private static ObservableList<FoodItem> mealObservableList = FXCollections.observableArrayList();
 	private static ListView<FoodItem> mealListView = new ListView<FoodItem>(mealObservableList);
@@ -174,7 +174,7 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
-	// This is a dummy function that displays
+	// Update foodList
 	private static void updateFoodListView(List<FoodItem> list) {
 		foodObservableList.removeAll(foodObservableList);
 		Iterator<FoodItem> listIterator = list.iterator();
@@ -183,7 +183,7 @@ public class Main extends Application {
 		}
 	}
 
-	// This is a dummy function that displays
+	// Initialize all buttons
 	private static void buttonInit() {
 		addButton = new Button("Add");
 		addButton.setFont(new Font("Arial", 20));
@@ -278,7 +278,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				Filter filterPopup = new Filter();
-				filteredList.clear();
+				filteredList = loadedList.getAllFoodItems();
 				filterPopup.display(loadedList, filteredList);
 				updateFoodListView(filteredList);
 			}

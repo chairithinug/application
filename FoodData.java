@@ -43,13 +43,13 @@ public class FoodData implements FoodDataADT<FoodItem> {
 		this.indices = new HashMap<String, BPTree<Double, FoodItem>>();
 		this.branchingFactor = 4;
 	}
-	
+
 	/**
-	* This method Load file path of the food item to the data file
-	*
-	*@param the path of the files 
-	**/
-	
+	 * This method Load file path of the food item to the data file
+	 *
+	 * @param the path of the files
+	 **/
+
 	@Override
 	public void loadFoodItems(String filePath) {
 		try {
@@ -72,27 +72,26 @@ public class FoodData implements FoodDataADT<FoodItem> {
 				}
 			});
 		} catch (IOException e) {
-		        flagError = true;
-			e.printStackTrace();
+			flagError = true;
 		}
 	}
-	
+
 	/**
-	* This method get a list of items containing string
-	*
-	* @param the names of fooditems
-	**/
+	 * This method get a list of items containing string
+	 *
+	 * @param the names of fooditems
+	 **/
 	@Override
 	public List<FoodItem> filterByName(String substring) {
 		return this.foodItemList.stream().filter(l -> l.getName().toLowerCase().contains(substring.toLowerCase()))
 				.collect(Collectors.toList());
 	}
-	
+
 	/**
-	* This method get a filtered list of items
-	*
-	* @param rules for filter
-	**/
+	 * This method get a filtered list of items
+	 *
+	 * @param rules for filter
+	 **/
 	@Override
 	public List<FoodItem> filterByNutrients(List<String> rules) {
 		List<List<FoodItem>> matches = rules.stream().map(rule -> rule.split(" ")).map(
@@ -105,12 +104,12 @@ public class FoodData implements FoodDataADT<FoodItem> {
 			return null;
 		}
 	}
-	
+
 	/**
-	* This method add an item into a loaded data
-	*
-	* @param fooditem that is added 
-	**/
+	 * This method add an item into a loaded data
+	 *
+	 * @param fooditem that is added
+	 **/
 	@Override
 	public void addFoodItem(FoodItem foodItem) {
 		foodItem.getNutrients().forEach((String nutrient, Double value) -> {
@@ -119,16 +118,16 @@ public class FoodData implements FoodDataADT<FoodItem> {
 			}
 			this.getIndices().get(nutrient).insert(value, foodItem);
 		});
-	        this.foodItemList.add(foodItem);
+		this.foodItemList.add(foodItem);
 	}
 
 	public HashMap<String, BPTree<Double, FoodItem>> getIndices() {
 		return indices;
 	}
-	
-	/** 
-	*This method get a list of all items
-	**/
+
+	/**
+	 * This method get a list of all items
+	 **/
 	@Override
 	public List<FoodItem> getAllFoodItems() {
 		return this.foodItemList;
@@ -166,4 +165,5 @@ public class FoodData implements FoodDataADT<FoodItem> {
 			e.printStackTrace();
 		}
 	}
+
 }

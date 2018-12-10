@@ -137,22 +137,23 @@ public class Filter {
 							isError = true;
 					}
 					filtered2 = list.filterByNutrients(rule);
-					System.out.println(filtered2 == null);
 				} catch (Exception f) {
 					isError = true;
 				}
 			}
 			if (returnList != null && list != null) {
-				returnList.clear();
 				if (cb1.isSelected() && cb2.isSelected() && filtered1 != null && filtered2 != null) {
+					returnList.clear();
 					filtered1.retainAll(filtered2);
 					returnList.addAll(filtered1);
 				} else if (cb1.isSelected() && filtered1 != null) {
+					returnList.clear();
 					returnList.addAll(filtered1);
 				} else if (cb2.isSelected() && filtered2 != null) {
+					returnList.clear();
 					returnList.addAll(filtered2);
 				} else {
-					returnList.addAll(list.getAllFoodItems());
+					
 				}
 			}
 			if (!isError) {

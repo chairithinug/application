@@ -88,12 +88,12 @@ public class Create {
 						&& notification5.getText() == null && notification6.getText() == null
 						&& notification7.getText() == null)) {
 					try {
-						FoodItem newFood = new FoodItem(notification.getText(), notification2.getText());
-						newFood.addNutrient("calories", Double.parseDouble(notification3.getText()));
-						newFood.addNutrient("fat", Double.parseDouble(notification4.getText()));
-						newFood.addNutrient("carbohydrate", Double.parseDouble(notification5.getText()));
-						newFood.addNutrient("fiber", Double.parseDouble(notification6.getText()));
-						newFood.addNutrient("protein", Double.parseDouble(notification7.getText()));
+						FoodItem newFood = new FoodItem(notification.getText().trim(), notification2.getText().trim());
+						newFood.addNutrient("calories", Double.parseDouble(notification3.getText().trim()));
+						newFood.addNutrient("fat", Double.parseDouble(notification4.getText().trim()));
+						newFood.addNutrient("carbohydrate", Double.parseDouble(notification5.getText().trim()));
+						newFood.addNutrient("fiber", Double.parseDouble(notification6.getText().trim()));
+						newFood.addNutrient("protein", Double.parseDouble(notification7.getText().trim()));
 						list.addFoodItem(newFood);
 						window.close();
 					} catch (Exception e) {

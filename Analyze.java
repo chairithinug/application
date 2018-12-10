@@ -20,7 +20,7 @@ public class Analyze {
 	Scene mainmenu;
 	
 	/**
-	* Descibes the window display
+	* Describes the window display
 	**/
 	public void display(Meal meal) {
 		Stage window = new Stage();
