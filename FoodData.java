@@ -72,7 +72,7 @@ public class FoodData implements FoodDataADT<FoodItem> {
 				}
 			});
 		} catch (IOException e) {
-			flagError = true;
+		        flagError = true;
 			e.printStackTrace();
 		}
 	}
@@ -119,7 +119,7 @@ public class FoodData implements FoodDataADT<FoodItem> {
 			}
 			this.getIndices().get(nutrient).insert(value, foodItem);
 		});
-		this.foodItemList.add(foodItem);
+	        this.foodItemList.add(foodItem);
 	}
 
 	public HashMap<String, BPTree<Double, FoodItem>> getIndices() {
