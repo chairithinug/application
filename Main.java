@@ -287,7 +287,14 @@ public class Main extends Application {
 				Filter filterPopup = new Filter();
 				filteredList = loadedList.getAllFoodItems();
 				filterPopup.display(loadedList, filteredList, OriginalList);
+				filteredList.sort(new Comparator<FoodItem>() {
+					@Override
+					public int compare(FoodItem f1, FoodItem f2) {
+						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
+					}
+				});
 				updateFoodListView(filteredList);
+				
 			}
 		});
 
