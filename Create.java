@@ -16,22 +16,22 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
-* This class add new food to existiing food list 
-**/
+ * This class add new food to existiing food list
+ **/
 public class Create {
 	Button btn1 = new Button();
 	Scene mainmenu;
 	private static Button createButton;
 	private static Button backButton;
-	
+
 	/**
-	* This method set the display of the new food 
-	**/
-	public void display(FoodData list) {
+	 * This method set the display of the new food
+	 **/
+	public void display(FoodData list, FoodData OriginalList) {
 		Scene scene = new Scene(new Group());
 
 		Stage window = new Stage();
-		window.setTitle("Create"); // set title of the window 
+		window.setTitle("Create"); // set title of the window
 		window.initModality(Modality.APPLICATION_MODAL); // make sure only be able to work with this current window
 		TextField notification = new TextField("53E4F123GG");
 		TextField notification2 = new TextField("QQ_PeanutButterChicken");
@@ -83,19 +83,56 @@ public class Create {
 		createButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (!(notification.getText() == null && notification2.getText() == null
-						&& notification3.getText() == null && notification4.getText() == null
-						&& notification5.getText() == null && notification6.getText() == null
-						&& notification7.getText() == null)) {
+				boolean isError = false;
+				if (!(notification.getText().trim().isEmpty() && notification2.getText().trim().isEmpty()
+						&& notification3.getText().trim().isEmpty() && notification4.getText().trim().isEmpty()
+						&& notification5.getText().trim().isEmpty() && notification6.getText().trim().isEmpty()
+						&& notification7.getText().trim().isEmpty())) {
 					try {
-						FoodItem newFood = new FoodItem(notification.getText().trim(), notification2.getText().trim());
-						newFood.addNutrient("calories", Double.parseDouble(notification3.getText().trim()));
-						newFood.addNutrient("fat", Double.parseDouble(notification4.getText().trim()));
-						newFood.addNutrient("carbohydrate", Double.parseDouble(notification5.getText().trim()));
-						newFood.addNutrient("fiber", Double.parseDouble(notification6.getText().trim()));
-						newFood.addNutrient("protein", Double.parseDouble(notification7.getText().trim()));
-						list.addFoodItem(newFood);
-						window.close();
+						if (notification.getText().trim().isEmpty() || notification2.getText().trim().isEmpty()) {
+							isError = true;
+						} else {
+							FoodItem newFood = new FoodItem(notification.getText().trim(),
+									notification2.getText().trim());
+							double cal = Double.parseDouble(notification3.getText().trim());
+							if (cal >= 0) {
+								newFood.addNutrient("calories", cal);
+							} else {
+								isError = true;
+							}
+							double fat = Double.parseDouble(notification4.getText().trim());
+							if (fat >= 0) {
+								newFood.addNutrient("fat", fat);
+							} else {
+								isError = true;
+							}
+							double car = Double.parseDouble(notification5.getText().trim());
+							if (car >= 0) {
+								newFood.addNutrient("carbohydrate", car);
+							} else {
+								isError = true;
+							}
+							double fib = Double.parseDouble(notification6.getText().trim());
+							if (fib >= 0) {
+								newFood.addNutrient("fiber", fib);
+							} else {
+								isError = true;
+							}
+							double pro = Double.parseDouble(notification7.getText().trim());
+							if (pro >= 0) {
+								newFood.addNutrient("protein", pro);
+							} else {
+								isError = true;
+							}
+							if (!isError) {
+								list.addFoodItem(newFood);
+								OriginalList.addFoodItem(newFood);
+								window.close();
+							}
+						}
+						if (!isError) {
+							window.close();
+						}
 					} catch (Exception e) {
 
 					}

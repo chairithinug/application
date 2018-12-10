@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.geometry.Insets;
@@ -32,7 +33,7 @@ public class Filter {
 	private CheckBox cb2 = new CheckBox("By Nutrient");
 
 //, List<Integer> memoryChoice
-	void display(FoodData list, List<FoodItem> returnList) {
+	void display(FoodData list, List<FoodItem> returnList, FoodData OriginalList) {
 		Stage popupwindow = new Stage();
 		popupwindow.initModality(Modality.APPLICATION_MODAL);// make sure only be able to work with this current window
 		popupwindow.setTitle("Filter");
@@ -69,6 +70,10 @@ public class Filter {
 			List<FoodItem> filtered2 = null;
 			if (cb1.isSelected()) {
 				if (t1field.getText() != null && list != null) {
+//					Iterator<FoodItem> iterator = OriginalList.getAllFoodItems().iterator();
+//					while(iterator.hasNext()) {
+//						list.addFoodItem(iterator.next());
+//					}
 					filtered1 = list.filterByName(t1field.getText());
 				}
 			}
@@ -141,7 +146,7 @@ public class Filter {
 					isError = true;
 				}
 			}
-			if (returnList != null && list != null) {
+			if (returnList != null && list != null && OriginalList != null) {
 				if (cb1.isSelected() && cb2.isSelected() && filtered1 != null && filtered2 != null) {
 					returnList.clear();
 					filtered1.retainAll(filtered2);
@@ -153,7 +158,8 @@ public class Filter {
 					returnList.clear();
 					returnList.addAll(filtered2);
 				} else {
-					
+					returnList.clear();
+					returnList.addAll(OriginalList.getAllFoodItems());
 				}
 			}
 			if (!isError) {

@@ -52,7 +52,8 @@ public class Main extends Application {
 
 	private static ObservableList<FoodItem> foodObservableList = FXCollections.observableArrayList();
 	private static ListView<FoodItem> foodListView = new ListView<FoodItem>(foodObservableList);
-	private static FoodData loadedList = new FoodData(); // Original list of all food
+	private static FoodData loadedList = new FoodData(); // list of all food
+	private static FoodData OriginalList = new FoodData(); // list of all food
 	private static List<FoodItem> filteredList;
 
 	private static ObservableList<FoodItem> mealObservableList = FXCollections.observableArrayList();
@@ -259,8 +260,14 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				Import importPopup = new Import();
-				importPopup.display(loadedList);
+				importPopup.display(loadedList, OriginalList);
 				loadedList.getAllFoodItems().sort(new Comparator<FoodItem>() {
+					@Override
+					public int compare(FoodItem f1, FoodItem f2) {
+						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
+					}
+				});
+				OriginalList.getAllFoodItems().sort(new Comparator<FoodItem>() {
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
 						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
@@ -279,7 +286,7 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				Filter filterPopup = new Filter();
 				filteredList = loadedList.getAllFoodItems();
-				filterPopup.display(loadedList, filteredList);
+				filterPopup.display(loadedList, filteredList, OriginalList);
 				updateFoodListView(filteredList);
 			}
 		});
@@ -292,7 +299,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				Create createPopup = new Create();
-				createPopup.display(loadedList);
+				createPopup.display(loadedList, OriginalList);
 				loadedList.getAllFoodItems().sort(new Comparator<FoodItem>() {
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
