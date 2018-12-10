@@ -1,7 +1,6 @@
 package application;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javafx.geometry.Insets;
@@ -70,16 +69,16 @@ public class Filter {
 			List<FoodItem> filtered2 = null;
 			if (cb1.isSelected()) {
 				if (t1field.getText() != null && list != null) {
-//					Iterator<FoodItem> iterator = OriginalList.getAllFoodItems().iterator();
-//					while(iterator.hasNext()) {
-//						list.addFoodItem(iterator.next());
-//					}
+					list.getAllFoodItems().removeAll(list.getAllFoodItems());
+					list.getAllFoodItems().addAll(OriginalList.getAllFoodItems());
 					filtered1 = list.filterByName(t1field.getText());
 				}
 			}
 			boolean isError = false;
 			if (cb2.isSelected()) {
 				try {
+					list.getAllFoodItems().removeAll(list.getAllFoodItems());
+					list.getAllFoodItems().addAll(OriginalList.getAllFoodItems());
 					List<String> rule = new ArrayList<String>();
 					if (!t2field.getText().trim().isEmpty()) {
 						if (Double.parseDouble(t2field.getText()) >= 0)
