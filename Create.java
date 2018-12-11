@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 //import javafx.scene.text.Font;
@@ -40,6 +41,16 @@ public class Create {
 		TextField notification5 = new TextField("2");
 		TextField notification6 = new TextField("4");
 		TextField notification7 = new TextField("15");
+		
+		Tooltip filterHelp = new Tooltip("FILL ALL FIELDS\nUNIQUE ID\nNO NEGATIVE\nONLY NUMERICAL");
+
+		notification.setTooltip(filterHelp);
+		notification2.setTooltip(filterHelp);
+		notification3.setTooltip(filterHelp);
+		notification4.setTooltip(filterHelp);
+		notification5.setTooltip(filterHelp);
+		notification6.setTooltip(filterHelp);
+		notification7.setTooltip(filterHelp);
 
 		final ContextMenu contextMenu = new ContextMenu();
 		// display layout
@@ -55,7 +66,7 @@ public class Create {
 		grid.add(new Label("Name: "), 0, 1);
 		grid.add(notification2, 1, 1);
 
-		grid.add(new Label("calories: "), 0, 2);
+		grid.add(new Label("Calories: "), 0, 2);
 		grid.add(notification3, 1, 2);
 
 		grid.add(new Label("Fat: "), 0, 3);
