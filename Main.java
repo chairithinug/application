@@ -36,6 +36,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -74,7 +75,7 @@ public class Main extends Application {
 	static final int WINDOW_BOTTOM = (int) (WINDOW_HEIGHT / 10);
 
 	// Apply to most buttons
-	private static int BUTTON_WIDTH = (int) (WINDOW_WIDTH / 19.2);
+	private static int BUTTON_WIDTH = (int) (WINDOW_WIDTH / 17.9);
 	private static int BUTTON_HEIGHT = (int) (WINDOW_HEIGHT / 21.6);
 
 	private static final String Title = "Food Query and Meal Analysis";
@@ -182,6 +183,7 @@ public class Main extends Application {
 		while (listIterator.hasNext()) {
 			foodObservableList.add(listIterator.next());
 		}
+		foodListView.setTooltip(new Tooltip("Food Count: " + foodObservableList.size()));
 	}
 
 	// Initialize all buttons
@@ -274,6 +276,7 @@ public class Main extends Application {
 					}
 				});
 				updateFoodListView(loadedList.getAllFoodItems());
+				filterButton.setTooltip(null);
 			}
 		});
 
@@ -294,6 +297,8 @@ public class Main extends Application {
 					}
 				});
 				updateFoodListView(filteredList);
+				String str = filterPopup.getTextFieldsTooltipString();
+				filterButton.setTooltip(new Tooltip(str));
 				
 			}
 		});
