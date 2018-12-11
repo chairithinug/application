@@ -161,9 +161,7 @@ public class FoodData implements FoodDataADT<FoodItem> {
 				nutrients.add("" + item.getNutrientValue("protein"));
 				return item.getID() + "," + item.getName() + "," + String.join(",", nutrients);
 			}).collect(Collectors.toList()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (IOException e) {}
 	}
 
 }
