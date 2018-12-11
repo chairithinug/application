@@ -27,6 +27,7 @@ public class Filter {
 	private TextField t10field = new TextField();
 	private TextField t11field = new TextField();
 
+	private List<TextField> textList = new ArrayList<TextField>();
 	private CheckBox cb1 = new CheckBox("By Name");
 
 	private CheckBox cb2 = new CheckBox("By Nutrient");
@@ -36,6 +37,21 @@ public class Filter {
 		Stage popupwindow = new Stage();
 		popupwindow.initModality(Modality.APPLICATION_MODAL);// make sure only be able to work with this current window
 		popupwindow.setTitle("Filter");
+		
+		Tooltip filterHelp = new Tooltip("Usage Example:\nFor fat<=30 enter(Fat from: ______ to 30)\nFor protein>=10"
+				+ " enter(Protein from: 10 to ______)\nFor carbohydrates==20 enter(Carbohydrates from: 20 to 20)"
+				+ "\nNO NEGATIVE\nONLY NUMERICAL");
+
+		t2field.setTooltip(filterHelp);
+		t3field.setTooltip(filterHelp);
+		t4field.setTooltip(filterHelp);
+		t5field.setTooltip(filterHelp);
+		t6field.setTooltip(filterHelp);
+		t7field.setTooltip(filterHelp);
+		t8field.setTooltip(filterHelp);
+		t9field.setTooltip(filterHelp);
+		t10field.setTooltip(filterHelp);
+		t11field.setTooltip(filterHelp);
 
 		BorderPane bp = new BorderPane();
 		Insets insets = new Insets(10, 10, 10, 10);
@@ -161,6 +177,7 @@ public class Filter {
 					returnList.addAll(OriginalList.getAllFoodItems());
 				}
 			}
+			setTextFieldsList();
 			if (!isError) {
 				popupwindow.close();
 			}
@@ -270,5 +287,130 @@ public class Filter {
 		t9field.clear();
 		t10field.clear();
 		t11field.clear();
+	}
+	private void setTextFieldsList() {
+
+		textList.add(t1field);
+		textList.add(t2field);
+		textList.add(t7field);
+		textList.add(t3field);
+		textList.add(t8field);
+		textList.add(t4field);
+		textList.add(t9field);
+		textList.add(t5field);
+		textList.add(t10field);
+		textList.add(t6field);
+		textList.add(t11field);
+
+	}
+
+	public String getTextFieldsTooltipString() {
+		String str = "CURRENT FILTERS\n";
+		try {
+			str = str + "\tName Filter: ";
+			ArrayList<TextField> toolTipList = (ArrayList<TextField>) textList;
+			if (toolTipList.get(0).getText() != null) {
+				str = str + toolTipList.get(0).getText();
+			}
+			str = str + "\n\tNutrient Filter:\n";
+			if (!toolTipList.get(1).getText().trim().isEmpty() && !toolTipList.get(2).getText().trim().isEmpty()) {
+				if (Double.parseDouble(toolTipList.get(1).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(2).getText()) >= 0
+						&& toolTipList.get(1).getText().equals(toolTipList.get(2).getText())) {
+					str = str + "\t\t-calories == " + toolTipList.get(1).getText() + "\n";
+				} else if (Double.parseDouble(toolTipList.get(1).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(2).getText()) >= 0) {
+					str = str + "\t\t-calories from " + toolTipList.get(1).getText() + " to "
+							+ toolTipList.get(2).getText() + "\n";
+				}
+
+			} else if (!toolTipList.get(1).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(1).getText()) >= 0) {// one text field in the pair is
+																				// null
+				str = str + "\t\t-calories >= " + toolTipList.get(1).getText() + "\n";
+			} else if (!toolTipList.get(2).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(2).getText()) >= 0) {
+				str = str + "\t\t-calories <= " + toolTipList.get(2).getText() + "\n";
+			}
+			if (!toolTipList.get(3).getText().trim().isEmpty() && !toolTipList.get(4).getText().trim().isEmpty()) {
+				if (Double.parseDouble(toolTipList.get(3).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(4).getText()) >= 0
+						&& toolTipList.get(3).getText().equals(toolTipList.get(4).getText())) {
+					str = str + "\t\t-fat == " + toolTipList.get(3).getText() + "\n";
+				} else if (Double.parseDouble(toolTipList.get(3).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(4).getText()) >= 0) {
+					str = str + "\t\t-fat from " + toolTipList.get(3).getText() + " to " + toolTipList.get(4).getText()
+							+ "\n";
+				}
+
+			} else if (!toolTipList.get(3).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(3).getText()) >= 0) {// one text field in the pair is
+																				// null
+				str = str + "\t\t-fat >= " + toolTipList.get(3).getText() + "\n";
+			} else if (!toolTipList.get(4).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(4).getText()) >= 0) {
+				str = str + "\t\t-fat <= " + toolTipList.get(4).getText() + "\n";
+			}
+			if (!toolTipList.get(5).getText().trim().isEmpty() && !toolTipList.get(6).getText().trim().isEmpty()) {
+				if (Double.parseDouble(toolTipList.get(5).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(6).getText()) >= 0
+						&& toolTipList.get(5).getText().equals(toolTipList.get(6).getText())) {
+					str = str + "\t\t-carbohydrates == " + toolTipList.get(5).getText() + "\n";
+				} else if (Double.parseDouble(toolTipList.get(5).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(6).getText()) >= 0) {
+					str = str + "\t\t-carbohydrates from " + toolTipList.get(5).getText() + " to "
+							+ toolTipList.get(6).getText() + "\n";
+				}
+
+			} else if (!toolTipList.get(5).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(5).getText()) >= 0) {// one text field in the pair is
+																				// null
+				str = str + "\t\t-carbohydrates >= " + toolTipList.get(5).getText() + "\n";
+			} else if (!toolTipList.get(6).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(6).getText()) >= 0) {
+				str = str + "\t\t-carbohydrates <= " + toolTipList.get(6).getText() + "\n";
+			}
+			if (!toolTipList.get(7).getText().trim().isEmpty() && !toolTipList.get(8).getText().trim().isEmpty()) {
+				if (Double.parseDouble(toolTipList.get(7).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(8).getText()) >= 0
+						&& toolTipList.get(7).getText().equals(toolTipList.get(8).getText())) {
+					str = str + "\t\t-fiber == " + toolTipList.get(7).getText() + "\n";
+				} else if (Double.parseDouble(toolTipList.get(7).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(8).getText()) >= 0) {
+					str = str + "\t\t-fiber from " + toolTipList.get(7).getText() + " to "
+							+ toolTipList.get(8).getText() + "\n";
+				}
+
+			} else if (!toolTipList.get(7).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(7).getText()) >= 0) {// one text field in the pair is
+																				// null
+				str = str + "\t\t-fiber >= " + toolTipList.get(7).getText() + "\n";
+			} else if (!toolTipList.get(8).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(8).getText()) >= 0) {
+				str = str + "\t\t-fiber <= " + toolTipList.get(8).getText() + "\n";
+			}
+			if (!toolTipList.get(9).getText().trim().isEmpty() && !toolTipList.get(10).getText().trim().isEmpty()) {
+				if (Double.parseDouble(toolTipList.get(9).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(10).getText()) >= 0
+						&& toolTipList.get(9).getText().equals(toolTipList.get(10).getText())) {
+					str = str + "\t\t-fiber == " + toolTipList.get(9).getText() + "\n";
+				} else if (Double.parseDouble(toolTipList.get(9).getText()) >= 0
+						&& Double.parseDouble(toolTipList.get(10).getText()) >= 0) {
+					str = str + "\t\t-fiber from " + toolTipList.get(9).getText() + " to "
+							+ toolTipList.get(10).getText() + "\n";
+				}
+
+			} else if (!toolTipList.get(9).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(9).getText()) >= 0) {// one text field in the pair is
+																				// null
+				str = str + "\t\t-fiber >= " + toolTipList.get(9).getText() + "\n";
+			} else if (!toolTipList.get(10).getText().trim().isEmpty()
+					&& Double.parseDouble(toolTipList.get(10).getText()) >= 0) {
+				str = str + "\t\t-fiber <= " + toolTipList.get(10).getText() + "\n";
+			}
+		} catch (Exception e) {
+		}
+
+		return str;
 	}
 }
