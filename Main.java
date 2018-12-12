@@ -50,9 +50,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
- * @author Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
  *
- *         main driver of program, it constructs the GUI and accesses food list
+ * main driver of program, it constructs the GUI and accesses food list
  */
 public class Main extends Application {
 
@@ -107,6 +106,11 @@ public class Main extends Application {
 								// filter
 								// button
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		Main.primaryStage = primaryStage;
@@ -184,7 +188,6 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
-	// Update foodList
 	/**
 	 * update the food list that will be seen
 	 * 
@@ -209,6 +212,12 @@ public class Main extends Application {
 		addButton.setFont(new Font("Arial", 20));
 		addButton.setAlignment(Pos.CENTER);
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				ObservableList<FoodItem> selected = foodListView.getSelectionModel().getSelectedItems();
@@ -219,6 +228,12 @@ public class Main extends Application {
 					}
 				}
 				mealObservableList.sort(new Comparator<FoodItem>() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+					 */
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
 						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
@@ -231,6 +246,12 @@ public class Main extends Application {
 		removeButton.setFont(new Font("Arial", 20));
 		removeButton.setAlignment(Pos.CENTER);
 		removeButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				ObservableList<FoodItem> selected = mealListView.getSelectionModel().getSelectedItems();
@@ -241,6 +262,10 @@ public class Main extends Application {
 					}
 				}
 				mealObservableList.sort(new Comparator<FoodItem>() {
+					
+					/* (non-Javadoc)
+					 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+					 */
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
 						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
@@ -253,6 +278,12 @@ public class Main extends Application {
 		clearButton.setFont(new Font("Arial", 20));
 		clearButton.setAlignment(Pos.CENTER);
 		clearButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				mealObservableList.removeAll(mealObservableList);
@@ -264,6 +295,12 @@ public class Main extends Application {
 		analyzeButton.setFont(new Font("Arial", 20));
 		analyzeButton.setAlignment(Pos.CENTER);
 		analyzeButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				Analyze analyzePopup = new Analyze();
@@ -276,17 +313,35 @@ public class Main extends Application {
 		importButton.setFont(new Font("Arial", 20));
 		importButton.setAlignment(Pos.CENTER);
 		importButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				Import importPopup = new Import();
 				importPopup.display(loadedList, OriginalList);
 				loadedList.getAllFoodItems().sort(new Comparator<FoodItem>() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+					 */
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
 						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
 					}
 				});
 				OriginalList.getAllFoodItems().sort(new Comparator<FoodItem>() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+					 */
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
 						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
@@ -302,12 +357,24 @@ public class Main extends Application {
 		filterButton.setFont(new Font("Arial", 20));
 		filterButton.setAlignment(Pos.CENTER);
 		filterButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				Filter filterPopup = new Filter();
 				filteredList = loadedList.getAllFoodItems();
 				filterPopup.display(loadedList, filteredList, OriginalList);
 				filteredList.sort(new Comparator<FoodItem>() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+					 */
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
 						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
@@ -328,11 +395,21 @@ public class Main extends Application {
 		createButton.setFont(new Font("Arial", 20));
 		createButton.setAlignment(Pos.CENTER);
 		createButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				Create createPopup = new Create();
 				createPopup.display(loadedList, OriginalList);
 				loadedList.getAllFoodItems().sort(new Comparator<FoodItem>() {
+					
+					/* (non-Javadoc)
+					 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+					 */
 					@Override
 					public int compare(FoodItem f1, FoodItem f2) {
 						return f1.getName().toLowerCase().compareTo(f2.getName().toLowerCase());
@@ -347,6 +424,12 @@ public class Main extends Application {
 		saveButton.setFont(new Font("Arial", 20));
 		saveButton.setAlignment(Pos.CENTER);
 		saveButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				Save savePopup = new Save();
