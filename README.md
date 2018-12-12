@@ -7,7 +7,7 @@ See Canvas assignment pages for details of the assignment.
 - Anapat Chairithinugull(email:chairithinug@wisc.edu)
 - Brock Thern(email:bthern@wisc.edu)
 - Effy Chu(email:xchu6wisc.edu)
-- Zening Fang(email:)
+- Zening Fang(email:zfang27@wisc.edu)
 
 ## INSTRUCTIONS:
 We are assuming we have unique ID's given to us by the user and any loaded files. We assume the format of the loaded files is correct.
