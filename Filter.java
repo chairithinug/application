@@ -1,5 +1,5 @@
 /**
- * Filename:   Main.java
+ * Filename:   Filter.java
  * Project:    Food Query and Meal Analysis
  * Version:    1.0
  * Date:       Nov 29th, 2018
@@ -28,7 +28,6 @@ import javafx.stage.*;
 /**
  * used to filter the food list
  * 
- * @author Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
  *
  */
 public class Filter {
