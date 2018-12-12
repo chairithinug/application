@@ -6,7 +6,7 @@ See Canvas assignment pages for details of the assignment.
 
 - Anapat Chairithinugull(email:chairithinug@wisc.edu)
 - Brock Thern(email:bthern@wisc.edu)
-- Effy Chu(email:)
+- Effy Chu(email:xchu6wisc.edu)
 - Zening Fang(email:)
 
 ## INSTRUCTIONS:
