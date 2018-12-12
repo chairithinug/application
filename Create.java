@@ -1,5 +1,5 @@
-/**
- * Filename:   Main.java
+/**/**
+ * Filename:   Create.java
  * Project:    Food Query and Meal Analysis
  * Version:    1.0
  * Date:       Nov 29th, 2018
@@ -18,7 +18,6 @@ package application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-//import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,7 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
-//import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -56,10 +54,10 @@ public class Create {
 		TextField notification5 = new TextField("2");
 		TextField notification6 = new TextField("4");
 		TextField notification7 = new TextField("15");
-		
+
 		Tooltip filterHelp = new Tooltip("FILL ALL FIELDS\nUNIQUE ID\nNO NEGATIVE\nONLY NUMERICAL");
 
-		notification.setTooltip(filterHelp);//user feedback helpful tips when hover over text fields
+		notification.setTooltip(filterHelp);// user feedback helpful tips when hover over text fields
 		notification2.setTooltip(filterHelp);
 		notification3.setTooltip(filterHelp);
 		notification4.setTooltip(filterHelp);
@@ -105,6 +103,10 @@ public class Create {
 		backButton.setOnAction(e -> window.close());
 		createButton = new Button("Create");
 		createButton.setOnAction(new EventHandler<ActionEvent>() {
+			
+			/* (non-Javadoc)
+			 * @see javafx.event.EventHandler#handle(javafx.event.Event)
+			 */
 			@Override
 			public void handle(ActionEvent event) {
 				boolean isError = false;
@@ -160,7 +162,7 @@ public class Create {
 					} catch (Exception e) {
 
 					}
-				} 
+				}
 			}
 
 		});
