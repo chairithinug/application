@@ -1,3 +1,18 @@
+/**
+ * Filename:   Main.java
+ * Project:    Food Query and Meal Analysis
+ * Version:    1.0
+ * Date:       Nov 29th, 2018
+ * Authors:    Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ * Semester:   Fall 2018
+ * Course:     CS400
+ * Instructor: Deppeler (deppeler@cs.wisc.edu)
+ * Credits:    
+ * Bugs:       
+ *
+ * Due Date:   before 10:00 pm on November 30th
+ */
 package application;
 
 import java.io.*;
@@ -19,17 +34,27 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	// List of all the food items.
 	private List<FoodItem> foodItemList;
 
-	private int branchingFactor; // NEW
+	private int branchingFactor; //tree branching factor
 
 	// Map of nutrients and their corresponding indices
 	private HashMap<String, BPTree<Double, FoodItem>> indices;
 
-	private boolean flagError = false;
+	private boolean flagError = false;//used to check if there was an issue loading food
 
+	/**
+	 * get error if there was an error loading food
+	 * 
+	 * @return whether or not there was an error loading food
+	 */
 	public boolean getStatusError() {
 		return flagError;
 	}
 
+	/**
+	 * sets an error if there is an issue loading food
+	 * 
+	 * @param t sets the error is there was an issue loading food
+	 */
 	public void setStatusError(boolean t) {
 		flagError = t;
 	}
