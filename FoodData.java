@@ -1,5 +1,5 @@
 /**
- * Filename:   Main.java
+ * Filename:   FoodData.java
  * Project:    Food Query and Meal Analysis
  * Version:    1.0
  * Date:       Nov 29th, 2018
@@ -34,12 +34,12 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	// List of all the food items.
 	private List<FoodItem> foodItemList;
 
-	private int branchingFactor; //tree branching factor
+	private int branchingFactor; // tree branching factor
 
 	// Map of nutrients and their corresponding indices
 	private HashMap<String, BPTree<Double, FoodItem>> indices;
 
-	private boolean flagError = false;//used to check if there was an issue loading food
+	private boolean flagError = false;// used to check if there was an issue loading food
 
 	/**
 	 * get error if there was an error loading food
@@ -53,7 +53,8 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	/**
 	 * sets an error if there is an issue loading food
 	 * 
-	 * @param t sets the error is there was an issue loading food
+	 * @param t
+	 *            sets the error is there was an issue loading food
 	 */
 	public void setStatusError(boolean t) {
 		flagError = t;
@@ -72,7 +73,8 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	/**
 	 * This method Load file path of the food item to the data file
 	 *
-	 * @param the path of the files
+	 * @param the
+	 *            path of the files
 	 **/
 
 	@Override
@@ -104,7 +106,8 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	/**
 	 * This method get a list of items containing string
 	 *
-	 * @param the names of fooditems
+	 * @param the
+	 *            names of fooditems
 	 **/
 	@Override
 	public List<FoodItem> filterByName(String substring) {
@@ -115,7 +118,8 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	/**
 	 * This method get a filtered list of items
 	 *
-	 * @param rules for filter
+	 * @param rules
+	 *            for filter
 	 **/
 	@Override
 	public List<FoodItem> filterByNutrients(List<String> rules) {
@@ -133,7 +137,8 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	/**
 	 * This method add an item into a loaded data
 	 *
-	 * @param fooditem that is added
+	 * @param fooditem
+	 *            that is added
 	 **/
 	@Override
 	public void addFoodItem(FoodItem foodItem) {
@@ -161,7 +166,8 @@ public class FoodData implements FoodDataADT<FoodItem> {
 	/**
 	 * Save the list of food items in ascending order by name
 	 *
-	 * @param filename name of the file where the data needs to be saved
+	 * @param filename
+	 *            name of the file where the data needs to be saved
 	 */
 	@Override
 	public void saveFoodItems(String filename) {
@@ -186,7 +192,8 @@ public class FoodData implements FoodDataADT<FoodItem> {
 				nutrients.add("" + item.getNutrientValue("protein"));
 				return item.getID() + "," + item.getName() + "," + String.join(",", nutrients);
 			}).collect(Collectors.toList()));
-		} catch (IOException e) {}
+		} catch (IOException e) {
+		}
 	}
 
 }
