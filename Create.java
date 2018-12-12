@@ -1,3 +1,18 @@
+/**
+ * Filename:   Main.java
+ * Project:    Food Query and Meal Analysis
+ * Version:    1.0
+ * Date:       Nov 29th, 2018
+ * Authors:    Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ * Semester:   Fall 2018
+ * Course:     CS400
+ * Instructor: Deppeler (deppeler@cs.wisc.edu)
+ * Credits:    
+ * Bugs:       
+ *
+ * Due Date:   before 10:00 pm on November 30th
+ */
 package application;
 
 import javafx.event.ActionEvent;
@@ -44,7 +59,7 @@ public class Create {
 		
 		Tooltip filterHelp = new Tooltip("FILL ALL FIELDS\nUNIQUE ID\nNO NEGATIVE\nONLY NUMERICAL");
 
-		notification.setTooltip(filterHelp);
+		notification.setTooltip(filterHelp);//user feedback helpful tips when hover over text fields
 		notification2.setTooltip(filterHelp);
 		notification3.setTooltip(filterHelp);
 		notification4.setTooltip(filterHelp);
@@ -89,8 +104,6 @@ public class Create {
 		backButton = new Button("Back");
 		backButton.setOnAction(e -> window.close());
 		createButton = new Button("Create");
-		// createButton.setPrefSize(10, 10);
-		// createButton.setAlignment(Pos.CENTER);
 		createButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -147,9 +160,7 @@ public class Create {
 					} catch (Exception e) {
 
 					}
-				} else {
-
-				}
+				} 
 			}
 
 		});
