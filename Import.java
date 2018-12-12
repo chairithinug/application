@@ -1,3 +1,18 @@
+/**
+ * Filename:   Main.java
+ * Project:    Food Query and Meal Analysis
+ * Version:    1.0
+ * Date:       Nov 29th, 2018
+ * Authors:    Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ * Semester:   Fall 2018
+ * Course:     CS400
+ * Instructor: Deppeler (deppeler@cs.wisc.edu)
+ * Credits:    
+ * Bugs:       
+ *
+ * Due Date:   before 10:00 pm on November 30th
+ */
 package application;
 
 import javafx.stage.Modality;
@@ -14,7 +29,8 @@ public class Import {
 	/**
 	 * This method set the display the import window
 	 *
-	 * @param the lists of food data
+	 * @param the
+	 *            lists of food data
 	 **/
 	public void display(FoodData list, FoodData OriginalList) {
 		Stage popupwindow = new Stage();
