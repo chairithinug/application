@@ -1,5 +1,5 @@
 /**
- * Filename:   Main.java
+ * Filename:   Meal.java
  * Project:    Food Query and Meal Analysis
  * Version:    1.0
  * Date:       Nov 29th, 2018
@@ -22,7 +22,6 @@ import java.util.List;
 /**
  * This class is a meal consisting of FoodItem and the number of each food
  * 
- * @author Dteam44
  *
  */
 public class Meal {
@@ -122,7 +121,8 @@ public class Meal {
 	/**
 	 * Remove food from a meal
 	 * 
-	 * @param food food to be removed
+	 * @param food
+	 *            food to be removed
 	 */
 	public void removeFromMeal(FoodItem food) {
 		Iterator<FoodItem> mealIterator = mealList.iterator();
@@ -149,7 +149,7 @@ public class Meal {
 			}
 		}
 		// error there is no food to be removed
-//		System.out.println("No Food! Can't delete!");
+		// System.out.println("No Food! Can't delete!");
 	}
 
 	/**
