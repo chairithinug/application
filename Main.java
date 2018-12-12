@@ -49,6 +49,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * @author Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ *         main driver of program, it constructs the GUI and accesses food list
+ */
 public class Main extends Application {
 
 	private static ObservableList<FoodItem> foodObservableList = FXCollections.observableArrayList();
@@ -97,6 +102,11 @@ public class Main extends Application {
 
 	private static Stage primaryStage;
 
+	private static Tooltip filterUsed = new Tooltip();// used to display filters used when hovering over filter button
+	private static String str;// the adaptable text to display previously used filters when hovering over
+								// filter
+								// button
+
 	@Override
 	public void start(Stage primaryStage) {
 		Main.primaryStage = primaryStage;
@@ -104,7 +114,7 @@ public class Main extends Application {
 		labelInit();
 		buttonInit();
 
-		ButtonBar bottomLeftBox = new ButtonBar();
+		ButtonBar bottomLeftBox = new ButtonBar();// buttons on meal list side
 		bottomLeftBox.setPrefSize(WINDOW_LEFT, WINDOW_BOTTOM);
 		bottomLeftBox.setButtonMinWidth(BUTTON_WIDTH);
 		bottomLeftBox.getButtons().addAll(addButton, removeButton, clearButton, analyzeButton);
@@ -115,13 +125,13 @@ public class Main extends Application {
 		bottomLeftBox.setPadding(new Insets(25));
 		bottomLeftBox.setBorder(border);
 
-		HBox topLeftBox = new HBox();
+		HBox topLeftBox = new HBox();// welcome text
 		topLeftBox.setPrefSize(WINDOW_LEFT, WINDOW_TOP);
 		topLeftBox.setAlignment(Pos.CENTER_LEFT);
 		topLeftBox.getChildren().add(welcomeText);
 		topLeftBox.setBorder(border);
 
-		GridPane mealGrid = new GridPane();
+		GridPane mealGrid = new GridPane();// for the meal
 		mealGrid.setPrefSize(WINDOW_LEFT, WINDOW_HEIGHT - WINDOW_TOP - WINDOW_BOTTOM);
 		mealGrid.setAlignment(Pos.TOP_LEFT);
 		mealGrid.setHgap(20);
@@ -145,7 +155,7 @@ public class Main extends Application {
 
 		VBox rightBox = new VBox();
 
-		GridPane buttonRightBox = new GridPane();
+		GridPane buttonRightBox = new GridPane();// buttons to edit food list
 		buttonRightBox.setBorder(border);
 		buttonRightBox.setPrefSize(WINDOW_RIGHT, WINDOW_TOP);
 		buttonRightBox.setAlignment(Pos.CENTER);
@@ -164,12 +174,10 @@ public class Main extends Application {
 		root.setLeft(leftBox);
 
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-		// TODO: put all style to CSS
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setMinHeight(720);
 		primaryStage.setMinWidth(1280);
 		primaryStage.setMaximized(true);
-		// primaryStage.setFullScreen(true);
 		primaryStage.setFullScreenExitHint("Press Esc to exit from fullscreen.");
 		primaryStage.setScene(scene);
 		primaryStage.setTitle(Title);
@@ -177,16 +185,25 @@ public class Main extends Application {
 	}
 
 	// Update foodList
+	/**
+	 * update the food list that will be seen
+	 * 
+	 * @param list
+	 *            list of food
+	 */
 	private static void updateFoodListView(List<FoodItem> list) {
 		foodObservableList.removeAll(foodObservableList);
 		Iterator<FoodItem> listIterator = list.iterator();
 		while (listIterator.hasNext()) {
 			foodObservableList.add(listIterator.next());
 		}
-		foodListView.setTooltip(new Tooltip("Food Count: " + foodObservableList.size()));
+		foodListView.setTooltip(new Tooltip("Food Count: " + foodObservableList.size()));// shows food count when hover
+																							// over food list
 	}
 
-	// Initialize all buttons
+	/**
+	 * Initialize button and add selected food to meal list
+	 */
 	private static void buttonInit() {
 		addButton = new Button("Add");
 		addButton.setFont(new Font("Arial", 20));
@@ -276,7 +293,7 @@ public class Main extends Application {
 					}
 				});
 				updateFoodListView(loadedList.getAllFoodItems());
-				filterButton.setTooltip(null);
+				filterButton.setTooltip(null);// no filters active
 			}
 		});
 
@@ -297,10 +314,13 @@ public class Main extends Application {
 					}
 				});
 				updateFoodListView(filteredList);
-				String str = filterPopup.getTextFieldsTooltipString();
-				filterButton.setTooltip(new Tooltip(str));
-				
+				str = filterPopup.getTextFieldsTooltipString();// update what filters are used when user hovers over
+																// filter button
+				filterUsed.setText(str);
+				filterButton.setTooltip(filterUsed);
+
 			}
+
 		});
 
 		createButton = new Button("Create");
@@ -341,6 +361,9 @@ public class Main extends Application {
 		exitButton.setOnAction(e -> primaryStage.close());
 	}
 
+	/**
+	 * initialize labels
+	 */
 	private static void labelInit() {
 		welcomeText = new Label("Welcome to Food Query and Meal Analysis");
 		welcomeText.setFont(new Font("Arial", 48));
@@ -351,6 +374,11 @@ public class Main extends Application {
 		mealText.setPadding(new Insets(20));
 	}
 
+	/**
+	 * this is where program begins
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
