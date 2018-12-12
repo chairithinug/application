@@ -1,3 +1,18 @@
+/**
+ * Filename:   Main.java
+ * Project:    Food Query and Meal Analysis
+ * Version:    1.0
+ * Date:       Nov 29th, 2018
+ * Authors:    Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ * Semester:   Fall 2018
+ * Course:     CS400
+ * Instructor: Deppeler (deppeler@cs.wisc.edu)
+ * Credits:    
+ * Bugs:       
+ *
+ * Due Date:   before 10:00 pm on November 30th
+ */
 package application;
 
 import javafx.geometry.Insets;
@@ -29,7 +44,6 @@ public class Analyze {
 		// buttons
 		btn1.setText("Back"); // Set the name for button 1
 		// Action of the button
-		// btn1.setOnAction(e -> window.setScene(mainmenu));
 		btn1.setOnAction(e -> window.close());
 		// Button layout
 		btn1.setPrefSize(80, 40);
