@@ -1,5 +1,5 @@
 /**
- * Filename:   Main.java
+ * Filename:   FoodItem.java
  * Project:    Food Query and Meal Analysis
  * Version:    1.0
  * Date:       Nov 29th, 2018
@@ -34,8 +34,10 @@ public class FoodItem {
 	/**
 	 * Constructor
 	 * 
-	 * @param name name of the food item
-	 * @param id   unique id of the food item
+	 * @param name
+	 *            name of the food item
+	 * @param id
+	 *            unique id of the food item
 	 */
 	public FoodItem(String id, String name) {
 		this.name = name;
