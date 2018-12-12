@@ -1,3 +1,18 @@
+/**
+ * Filename:   Main.java
+ * Project:    Food Query and Meal Analysis
+ * Version:    1.0
+ * Date:       Nov 29th, 2018
+ * Authors:    Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ * Semester:   Fall 2018
+ * Course:     CS400
+ * Instructor: Deppeler (deppeler@cs.wisc.edu)
+ * Credits:    
+ * Bugs:       
+ *
+ * Due Date:   before 10:00 pm on November 30th
+ */
 package application;
 
 import java.util.ArrayList;
@@ -10,6 +25,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
+/**
+ * used to filter the food list
+ * 
+ * @author Anapat Chairithinugull, Brock Thern, Effy Chu, Zening Fang
+ *
+ */
 public class Filter {
 	private String twelvePxFont = "-fx-font-size: 12px;";// helps promote consistency
 	private String t = "g to";// helps promote consistency
@@ -32,17 +53,26 @@ public class Filter {
 
 	private CheckBox cb2 = new CheckBox("By Nutrient");
 
-//, List<Integer> memoryChoice
+	/**
+	 * create filter rules based on user input
+	 * 
+	 * @param list
+	 *            food list that can be changed
+	 * @param returnList
+	 *            filtered list
+	 * @param OriginalList
+	 *            starting list that doesn't change
+	 */
 	void display(FoodData list, List<FoodItem> returnList, FoodData OriginalList) {
 		Stage popupwindow = new Stage();
-		popupwindow.initModality(Modality.APPLICATION_MODAL);// make sure only be able to work with this current window
+		popupwindow.initModality(Modality.APPLICATION_MODAL);// can only access this current window
 		popupwindow.setTitle("Filter");
-		
+
 		Tooltip filterHelp = new Tooltip("Usage Example:\nFor fat<=30 enter(Fat from: ______ to 30)\nFor protein>=10"
 				+ " enter(Protein from: 10 to ______)\nFor carbohydrates==20 enter(Carbohydrates from: 20 to 20)"
 				+ "\nNO NEGATIVE\nONLY NUMERICAL");
 
-		t2field.setTooltip(filterHelp);
+		t2field.setTooltip(filterHelp);// text field tips
 		t3field.setTooltip(filterHelp);
 		t4field.setTooltip(filterHelp);
 		t5field.setTooltip(filterHelp);
@@ -261,6 +291,9 @@ public class Filter {
 		popupwindow.showAndWait();
 	}
 
+	/**
+	 * user can't access text fields if no check box is selected
+	 */
 	private void textFieldsInit() {
 		t1field.setDisable(!cb1.isSelected());
 		t2field.setDisable(!cb2.isSelected());
@@ -275,6 +308,9 @@ public class Filter {
 		t11field.setDisable(!cb2.isSelected());
 	}
 
+	/**
+	 * clear text fields
+	 */
 	private void clearFields() {
 		t1field.clear();
 		t2field.clear();
@@ -288,6 +324,11 @@ public class Filter {
 		t10field.clear();
 		t11field.clear();
 	}
+
+	/**
+	 * add text fields to a list to be used for user feedback about filters when
+	 * hover over filter button
+	 */
 	private void setTextFieldsList() {
 
 		textList.add(t1field);
@@ -304,6 +345,11 @@ public class Filter {
 
 	}
 
+	/**
+	 * creates the user feedback about filters when hover over filter button
+	 * 
+	 * @return user feedback about filter
+	 */
 	public String getTextFieldsTooltipString() {
 		String str = "CURRENT FILTERS\n";
 		try {
